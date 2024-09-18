@@ -1,10 +1,19 @@
-# BHTikTok
+# BHTikTok++
 An awesome tweak for TikTok!
 
 # Features
 - No Ads
 - Download Videos
+- Download Photos
 - Download Musics
+- Upload Region
+- Show Username
+- Disable Pull-to-refresh
+- Disable Unsensitive warning
+- Disable Warnings
+- Disable Live Broadcast
+- Skip Recommendations 
+- Remove Watermark
 - Show/Hide UI button
 - Copy video decription
 - Copy video link
@@ -17,6 +26,10 @@ An awesome tweak for TikTok!
 - Confirm follow
 - Save profile image
 - Copy profile information
+- Profile Video Count
+- Video Upload Date
+- Video Like Count
+- Always Upload In HD
 - Extend bio
 - Extend comment
 - Always open in Safari

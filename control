@@ -1,9 +1,9 @@
-Package: com.bandarhl.bhtiktok
-Name: BHTikTok
-Version: 0.0.1
+Package: com.raulsaeed.bhtiktok++
+Name: BHTikTok++
+Version: 1.0
 Architecture: iphoneos-arm
 Description: An awesome tweak for TikTok!
-Maintainer: Bandar Alruwaili
-Author: Bandar Alruwaili
+Maintainer: raul saeed
+Author: raul saeed
 Section: Tweaks
 Depends: mobilesubstrate, ws.hbang.common

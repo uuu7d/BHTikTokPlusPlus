@@ -21,7 +21,7 @@
     return self;
 }
 - (void)setupAppearance {
-    self.title = @"BHTikTok";
+    self.title = @"TikTok++";
 
     if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
         HBAppearanceSettings *appearanceSettings = [[HBAppearanceSettings alloc] init];
@@ -397,25 +397,33 @@
         PSSpecifier *developer = [self newSectionWithTitle:@"Developer" footer:nil];
         
         PSSpecifier *hideAds = [self newSwitchCellWithTitle:@"No Ads" detailTitle:@"Remove all Ads from TikTok app" key:@"hide_ads" defaultValue:true changeAction:nil];
-        PSSpecifier *downloadVid = [self newSwitchCellWithTitle:@"Download Videos" detailTitle:@"Download Videos by log press in any video you want." key:@"dw_videos" defaultValue:true changeAction:nil];
-        PSSpecifier *downloadMis = [self newSwitchCellWithTitle:@"Download Musics" detailTitle:@"Download Musics by log press in any video you want." key:@"dw_musics" defaultValue:true changeAction:nil];
-        PSSpecifier *hideElementButton = [self newSwitchCellWithTitle:@"Show/Hide UI button" detailTitle:@"A button on the main page to remove UI elements" key:@"remove_elements_button" defaultValue:true changeAction:nil];
-        PSSpecifier *copyVideoDecription = [self newSwitchCellWithTitle:@"Copy video decription" detailTitle:@"Show new option in long press to copy the video decription" key:@"copy_decription" defaultValue:true changeAction:nil];
-        PSSpecifier *copyVideoLink = [self newSwitchCellWithTitle:@"Copy video link" detailTitle:@"Show new option in long press to copy the video link" key:@"copy_video_link" defaultValue:true changeAction:nil];
-        PSSpecifier *copyMusicLink = [self newSwitchCellWithTitle:@"Copy Music link" detailTitle:@"Show new option in long press to copy the music link" key:@"copy_music_link" defaultValue:true changeAction:nil];
+        PSSpecifier *downloadButton = [self newSwitchCellWithTitle:@"Download button" detailTitle:@"Shows a download button in feed to download video, music, photos, and also to copy music link, video link, description text." key:@"download_button" defaultValue:false changeAction:nil];
+        PSSpecifier *removeWatermark = [self newSwitchCellWithTitle:@"Remove Watermark" detailTitle:@"Removes watermark from default tiktok download button." key:@"remove_watermark" defaultValue:false changeAction:nil];
+        PSSpecifier *uploadRegion = [self newSwitchCellWithTitle:@"Upload region" detailTitle:@"Shows country flag next to users name." key:@"upload_region" defaultValue:false changeAction:nil];
         PSSpecifier *autoPlay = [self newSwitchCellWithTitle:@"Auto Play Next Video" detailTitle:@"Play next video automatcilly when the post is finished" key:@"auto_play" defaultValue:false changeAction:nil];
+        PSSpecifier *hideElementButton = [self newSwitchCellWithTitle:@"Show/Hide UI button" detailTitle:@"A button on the main page to remove UI elements" key:@"remove_elements_button" defaultValue:true changeAction:nil];
         PSSpecifier *progressBar = [self newSwitchCellWithTitle:@"Show progress bar" detailTitle:nil key:@"show_porgress_bar" defaultValue:true changeAction:nil];
         PSSpecifier *likeConfirmation = [self newSwitchCellWithTitle:@"Confirm like" detailTitle:@"Show alert when you click the like button to confirm the like" key:@"like_confirm" defaultValue:false changeAction:nil];
         PSSpecifier *likeCommentConfirmation = [self newSwitchCellWithTitle:@"Confirm comment like" detailTitle:@"Show alert when you click the like button in comment to confirm the like" key:@"like_comment_confirm" defaultValue:false changeAction:nil];
         PSSpecifier *dislikeCommentConfirmation = [self newSwitchCellWithTitle:@"Confirm comment dislike" detailTitle:@"Show alert when you click the dislike button in comment to confirm the like" key:@"dislike_comment_confirm" defaultValue:false changeAction:nil];
         PSSpecifier *followConfirmation = [self newSwitchCellWithTitle:@"Confirm follow" detailTitle:@"Show alert when you click the follow button to confirm the like" key:@"follow_confirm" defaultValue:false changeAction:nil];
+        PSSpecifier *showUsername = [self newSwitchCellWithTitle:@"Show username" detailTitle:@"Show username instead of nickname." key:@"show_username" defaultValue:false changeAction:nil];
+        PSSpecifier *disablePullToRefresh = [self newSwitchCellWithTitle:@"Disable pull to refresh" detailTitle:@"" key:@"pull_to_refresh" defaultValue:false changeAction:nil];
+        PSSpecifier *disableUnsensitive = [self newSwitchCellWithTitle:@"Disable unsensitive warning" detailTitle:@"" key:@"disable_unsensitive" defaultValue:false changeAction:nil];
+        PSSpecifier *disableWarnings = [self newSwitchCellWithTitle:@"Disable warnings" detailTitle:@"Disable the warnings message under the video desctiption." key:@"disable_warnings" defaultValue:false changeAction:nil];
+        PSSpecifier *disableLive = [self newSwitchCellWithTitle:@"Disable live broadcasts" detailTitle:@"" key:@"disable_live" defaultValue:false changeAction:nil];
+        PSSpecifier *skipRecommnedations = [self newSwitchCellWithTitle:@"Skip Recommendations" detailTitle:@"" key:@"skip_recommnedations" defaultValue:false changeAction:nil];
 
         PSSpecifier *profileSave = [self newSwitchCellWithTitle:@"Save profile image" detailTitle:@"Save profile image by long press." key:@"save_profile" defaultValue:true changeAction:nil];
         PSSpecifier *profileCopy = [self newSwitchCellWithTitle:@"Copy profile information" detailTitle:@"Copy profile information by long press." key:@"copy_profile_information" defaultValue:true changeAction:nil];
         PSSpecifier *extendedBio = [self newSwitchCellWithTitle:@"Extend bio" detailTitle:@"Extend the bio letters by 222 characters" key:@"extended_bio" defaultValue:true changeAction:nil];
         PSSpecifier *extendedComment = [self newSwitchCellWithTitle:@"Extend comment" detailTitle:@"Extend the comment letters by 240 characters" key:@"extended_comment" defaultValue:true changeAction:nil];
+        PSSpecifier *profileVideoCount = [self newSwitchCellWithTitle:@"Profile video count" detailTitle:@"Show users total uploaded videos" key:@"uploaded_videos" defaultValue:false changeAction:nil];
+        PSSpecifier *videoLikeCount = [self newSwitchCellWithTitle:@"Video Like Count" detailTitle:@"Show video like count on video thumbnails in user profile." key:@"video_like_count" defaultValue:false changeAction:nil];
+        PSSpecifier *videoUploadDate = [self newSwitchCellWithTitle:@"Video Upload Date" detailTitle:@"Show upload date on video thumbnails in user profile." key:@"video_upload_date" defaultValue:false changeAction:nil];
         PSSpecifier *alwaysOpenSafari = [self newSwitchCellWithTitle:@"Always open in Safari" detailTitle:@"Force twitter to open URLs in Safari or your default browser." key:@"openInBrowser" defaultValue:false changeAction:nil];
-        
+        PSSpecifier *alwaysUploadHD = [self newSwitchCellWithTitle:@"Always upload HD" detailTitle:@"Force upload in HD video quality." key:@"upload_hd" defaultValue:false changeAction:nil];
+
         PSSpecifier *regionSwitch = [self newSwitchCellWithTitle:@"Enable changing region" detailTitle:nil key:@"en_region" defaultValue:false changeAction:nil];
         PSSpecifier *regions = [self newLinkListCellWithTitle:@"Regions" key:@"region" defaultValue:@0 dynamicRule:@"en_region, ==, 0" validTitles:regionTitles validValues:regionCodes];
         
@@ -427,27 +435,36 @@
         PSSpecifier *appLock = [self newSwitchCellWithTitle:@"Padlock" detailTitle:@"Lock TikTok with passcode" key:@"padlock" defaultValue:false changeAction:nil];
         
         // dvelopers section
-        PSSpecifier *bandarHL = [self newHBTwitterCellWithTitle:@"BandarHelal" twitterUsername:@"BandarHL" customAvatarURL:@"https://unavatar.io/twitter/BandarHL"];
+        PSSpecifier *raul = [self newHBTwitterCellWithTitle:@"Ashad Saeed" twitterUsername:@"Ashad__Saeed" customAvatarURL:@"https://unavatar.io/github/raulsaeed"];
+        PSSpecifier *github = [self newHBLinkCellWithTitle:@"Github" detailTitle:@"My Github Page" url:@"https://github.com/raulsaeed"];
         PSSpecifier *tipJar = [self newHBLinkCellWithTitle:@"Tip Jar" detailTitle:@"Donate Via Paypal" url:@"https://www.paypal.me/BandarHL"];
         
         _specifiers = [NSMutableArray arrayWithArray:@[
             
             feedSection, // 1
             hideAds,
-            downloadVid,
-            downloadMis,
+            downloadButton,
+            removeWatermark,
             hideElementButton,
-            copyVideoDecription,
-            copyVideoLink,
-            copyMusicLink,
+            uploadRegion,
             autoPlay,
             progressBar,
+            showUsername,
+            disablePullToRefresh,
+            disableUnsensitive,
+            disableWarnings,
+            disableLive,
+            skipRecommnedations,
 
             profileSection, // 2
             profileSave,
             profileCopy,
+            profileVideoCount,
+            videoUploadDate,
+            videoLikeCount,
             extendedBio,
             extendedComment,
+            alwaysUploadHD,
 
             confirmationSection, // 3
             likeConfirmation,
@@ -470,7 +487,8 @@
             appLock,
             
             developer, // 7
-            bandarHL,
+            raul,
+            github,
             tipJar,
         ]];
         

@@ -5,29 +5,41 @@
 + (BOOL)hideAds {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"hide_ads"];
 }
-+ (BOOL)downloadVideos {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"dw_videos"];
++ (BOOL)downloadButton {
+     return [[NSUserDefaults standardUserDefaults] boolForKey:@"download_button"];
 }
-+ (BOOL)downloadMusics {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"dw_musics"];
++ (BOOL)removeWatermark {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"remove_watermark"];
 }
 + (BOOL)hideElementButton {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"remove_elements_button"];
 }
-+ (BOOL)copyVideoDecription {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"copy_decription"];
-}
-+ (BOOL)copyMusicLink {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"copy_music_link"];
-}
-+ (BOOL)copyVideoLink {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"copy_video_link"];
++ (BOOL)uploadRegion {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"upload_region"];
 }
 + (BOOL)autoPlay {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"auto_play"];
 }
 + (BOOL)progressBar {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"show_porgress_bar"];
+}
++ (BOOL)showUsername {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"show_username"];
+}
++ (BOOL)disablePullToRefresh {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"pull_to_refresh"];
+}
++ (BOOL)disableUnsensitive {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"disable_unsensitive"];
+}
++ (BOOL)disableWarnings {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"disable_warnings"];
+}
++ (BOOL)disableLive {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"disable_live"];
+}
++ (BOOL)skipRecommendations {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"skip_recommnedations"];
 }
 + (BOOL)likeConfirmation {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"like_confirm"];
@@ -47,11 +59,20 @@
 + (BOOL)profileCopy {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"copy_profile_information"];
 }
++ (BOOL)profileVideoCount {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"uploaded_videos"];
+}
 + (BOOL)alwaysOpenSafari {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"openInBrowser"];
 }
 + (BOOL)regionChangingEnabled {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"en_region"];
+}
++ (BOOL)videoLikeCount {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"video_like_count"];
+}
++ (BOOL)videoUploadDate {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"video_upload_date"];
 }
 + (NSDictionary *)selectedRegion {
     return [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"region"];
@@ -67,6 +88,9 @@
 }
 + (BOOL)extendedComment {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"extendedComment"];
+}
++ (BOOL)uploadHD {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"upload_hd"];
 }
 + (BOOL)appLock {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"padlock"];

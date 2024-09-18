@@ -11,15 +11,61 @@
 @interface AppDelegate : NSObject <UIApplicationDelegate>
 @end
 
+@interface TTKCommentPanelViewController: UIViewController
+@end 
+
+@interface AWEUserNameLabel: UILabel
+-(void)addVerifiedIcon:(BOOL)arg1;
+@end
+
+@interface TTKProfileRootView: UIView
+@end
+
+@interface BDImageView: UIImageView
+- (void)handleLongPress:(UILongPressGestureRecognizer *)sender;
+- (void)addHandleLongPress;
+- (id)bd_baseImage;
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo;
+@end
+
+@interface TTTAttributedLabel: UILabel 
+- (void)handleLongPress:(UILongPressGestureRecognizer *)sender;
+- (void)addHandleLongPress;
+@end
+
+@interface AWEPlayInteractionAuthorView: UIView
+- (void)addSubview:(id)arg1;
+- (NSString *)emojiForCountryCode:(NSString *)countryCode;
+@end
 @interface SparkViewController: UIViewController
 @property(nonatomic, strong, readwrite) NSURL *originURL;
 - (void)didTapCloseButton;
 @end
 
+@interface AWEAwemeACLItem: NSObject
+- (void)setWatermarkType:(NSUInteger)arg1;
+- (NSUInteger)watermarkType;
+@end
+
+@interface ACCCreationPublishAction: NSObject
+- (BOOL)is_open_hd;
+- (void)setIs_open_hd:(BOOL)arg1;
+- (BOOL)is_have_hd;
+- (void)setIs_have_hd:(BOOL)arg1;
+@end
+
+@interface AWEMaskInfoModel
+- (BOOL)showMask;
+- (void)setShowMask:(BOOL)arg1;
+@end
+
 @interface UIView (RCTViewUnmounting)
 @property(retain, nonatomic) UIViewController *yy_viewController;
 @end
-
+@interface AWECommentPanelCell: UITableView
+- (void)onLikeAction:(id)arg1;
+- (void)onDislikeAction:(id)arg1;
+@end
 @interface TikTokFeedTabControl: UIView
 @end
 
@@ -52,14 +98,11 @@
 @property(readonly, nonatomic) NSArray <AWEPhotoAlbumPhoto *> *photos;
 @end
 
-@interface AWEAwemeModel : NSObject
-@property(nonatomic) BOOL isAds;
-@property(retain, nonatomic) AWEVideoModel *video;
-@property(retain, nonatomic) id music;
-@property(retain, nonatomic) AWEPhotoAlbumModel *photoAlbum;
-@property(nonatomic) NSString *music_songName;
-@property(nonatomic) NSString *music_artistName;
-@property(nonatomic, strong, readwrite) AWEAwemeModel *currentPlayingStory;
+@interface AWEAwemeStatisticsModel: NSObject
+@property (nonatomic, strong, readwrite) NSNumber *diggCount;
+@end
+
+@interface TUXLabel: UILabel 
 @end
 
 @interface AWEUserModel: NSObject
@@ -67,6 +110,39 @@
 @property(nonatomic, copy, readwrite) NSString *nickname;
 @property(nonatomic, copy, readwrite) NSString *signature;
 @property(nonatomic, copy, readwrite) NSString *socialName;
+@property (nonatomic, strong, readwrite) NSNumber *visibleVideosCount;
+@end
+
+@interface AWEAwemeModel : NSObject
+@property(nonatomic) BOOL isAds;
+@property(retain, nonatomic) AWEVideoModel *video;
+@property(retain, nonatomic) id music;
+@property (nonatomic, copy, readwrite) NSString *itemID;
+@property(retain, nonatomic) AWEPhotoAlbumModel *photoAlbum;
+@property(nonatomic) NSString *music_songName;
+@property(nonatomic) NSString *music_artistName;
+@property(nonatomic, strong, readwrite) AWEAwemeModel *currentPlayingStory;
+@property (nonatomic, copy, readwrite) NSString *region;
+@property (nonatomic, strong, readwrite) AWEAwemeStatisticsModel *statistics;
+@property (nonatomic, strong, readwrite) NSNumber *createTime;
+@property (nonatomic, strong, readwrite) AWEUserModel *author;
+@property (nonatomic, assign, readwrite) BOOL isUserRecommendBigCard;
++ (id)liveStreamURLJSONTransformer;
++ (id)relatedLiveJSONTransformer;
++ (id)rawModelFromLiveRoomModel:(id)arg1;
++ (id)aweLiveRoom_subModelPropertyKey;
+- (void)live_callInitWithDictyCategoryMethod:(id)arg1;
+@end
+
+@interface AWEUserWorkCollectionViewCell: UICollectionView
+@property (nonatomic, strong, readwrite) AWEAwemeModel *model;
+- (NSString *)formattedNumber:(NSInteger)number;
+- (NSString *)formattedDateStringFromTimestamp:(NSTimeInterval)timestamp;
+- (id)contentView;
+@end
+
+@interface TTKProfileOtherViewController :UIViewController
+@property (nonatomic, strong, readwrite) AWEUserModel *user;
 @end
 
 @interface AWESettingItemModel: NSObject
@@ -158,6 +234,8 @@
 @end
 
 @interface AWEFeedCellViewController: AWEAwemeBaseViewController
+
+@property (nonatomic, strong, readwrite) AWEAwemeModel *model;
 @end
 
 @interface AWEAwemeDetailCellViewController: AWEAwemeBaseViewController
@@ -181,6 +259,15 @@
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender;
 - (void)addHideElementButton;
 - (void)hideElementButtonHandler:(UIButton *)sender;
+- (void)addDownloadButton;
+- (void) downloadButtonHandler:(UIButton *)sender;
+- (void)downloadVideo:(AWEAwemeBaseViewController *)rootVC;
+- (void)downloadMusic:(AWEAwemeBaseViewController *)rootVC;
+- (void)copyMusic:(AWEAwemeBaseViewController *)rootVC;
+- (void)copyVideo:(AWEAwemeBaseViewController *)rootVC;
+- (void)copyDecription:(AWEAwemeBaseViewController *)rootVC;
+- (void)downloadPhotos:(TTKPhotoAlbumDetailCellController *)rootVC photoIndex:(unsigned long)index;
+- (void)downloadPhotos:(TTKPhotoAlbumDetailCellController *)rootVC;
 @end
 @interface AWEFeedViewTemplateCell () <BHDownloadDelegate, BHMultipleDownloadDelegate>
 @end
@@ -198,6 +285,13 @@
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender;
 - (void)addHideElementButton;
 - (void)hideElementButtonHandler:(UIButton *)sender;
+- (void)addDownloadButton;
+- (void) downloadButtonHandler:(UIButton *)sender;
+- (void)downloadVideo:(AWEAwemeBaseViewController *)rootVC;
+- (void)downloadMusic:(AWEAwemeBaseViewController *)rootVC;
+- (void)copyMusic:(AWEAwemeBaseViewController *)rootVC;
+- (void)copyVideo:(AWEAwemeBaseViewController *)rootVC;
+- (void)copyDecription:(AWEAwemeBaseViewController *)rootVC;
 @end
 @interface AWEAwemeDetailTableViewCell () <BHDownloadDelegate>
 @end
@@ -212,6 +306,13 @@
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender;
 - (void)addHideElementButton;
 - (void)hideElementButtonHandler:(UIButton *)sender;
+- (void)addDownloadButton;
+- (void) downloadButtonHandler:(UIButton *)sender;
+- (void)downloadVideo:(AWEAwemeBaseViewController *)rootVC;
+- (void)downloadMusic:(AWEAwemeBaseViewController *)rootVC;
+- (void)copyMusic:(AWEAwemeBaseViewController *)rootVC;
+- (void)copyVideo:(AWEAwemeBaseViewController *)rootVC;
+- (void)copyDecription:(AWEAwemeBaseViewController *)rootVC;
 @end
 @interface TTKStoryDetailTableViewCell () <BHDownloadDelegate>
 @end
@@ -250,12 +351,17 @@
 @interface TTKSearchEntranceButton: UIButton
 @end
 
+@interface AWEPlayInteractionWarningElementView: UIView
+- (id)warningImage;
+- (id)warningLabel;
+@end
 @interface AWEFeedContainerViewController: UIViewController
 @property(nonatomic, strong, readwrite) TTKSearchEntranceButton *searchEntranceView;
 @end
 
 @interface AWENewFeedTableViewController : UIViewController
 @property(nonatomic, weak, readwrite) UIViewController *tabContainerController;
+@property (nonatomic, assign, readonly) AWEAwemeModel *currentAweme;
 - (void)scrollToNextVideo;
 @end
 

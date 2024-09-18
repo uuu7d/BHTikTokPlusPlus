@@ -3,25 +3,33 @@
 
 @interface BHIManager: NSObject
 + (BOOL)hideAds;
-+ (BOOL)downloadVideos;
-+ (BOOL)downloadMusics;
++ (BOOL)downloadButton;
++ (BOOL)removeWatermark;
 + (BOOL)hideElementButton;
-+ (BOOL)copyVideoDecription;
-+ (BOOL)copyMusicLink;
-+ (BOOL)copyVideoLink;
++ (BOOL)uploadRegion;
 + (BOOL)autoPlay;
 + (BOOL)progressBar;
++ (BOOL)showUsername;
++ (BOOL)disablePullToRefresh;
++ (BOOL)disableUnsensitive;
++ (BOOL)disableWarnings;
++ (BOOL)disableLive;
++ (BOOL)skipRecommendations;
 + (BOOL)likeConfirmation;
 + (BOOL)likeCommentConfirmation;
 + (BOOL)dislikeCommentConfirmation;
 + (BOOL)followConfirmation;
 + (BOOL)profileSave;
 + (BOOL)profileCopy;
++ (BOOL)profileVideoCount;
++ (BOOL)videoLikeCount;
++ (BOOL)videoUploadDate;
 + (BOOL)alwaysOpenSafari;
 + (BOOL)regionChangingEnabled;
 + (NSDictionary *)selectedRegion;
 + (BOOL)fakeChangesEnabled;
 + (BOOL)fakeVerified;
++ (BOOL)uploadHD;
 + (BOOL)extendedBio;
 + (BOOL)extendedComment;
 + (BOOL)appLock;
