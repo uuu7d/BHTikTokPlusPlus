@@ -21,7 +21,7 @@
     return self;
 }
 - (void)setupAppearance {
-    self.title = @"TikTok++";
+    self.title = @"BHTikTok++";
 
     if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
         HBAppearanceSettings *appearanceSettings = [[HBAppearanceSettings alloc] init];

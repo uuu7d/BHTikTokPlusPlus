@@ -252,8 +252,8 @@ static BOOL isAuthenticationShowed = FALSE;
         TTKSettingsBaseCellPlugin *BHTikTokSettingsPluginCell = [[%c(TTKSettingsBaseCellPlugin) alloc] initWithPluginContext:self.context];
 
         AWESettingItemModel *BHTikTokSettingsItemModel = [[%c(AWESettingItemModel) alloc] initWithIdentifier:@"bhtiktok_settings"];
-        [BHTikTokSettingsItemModel setTitle:@"BHTikTok settings"];
-        [BHTikTokSettingsItemModel setDetail:@"BHTikTok settings"];
+        [BHTikTokSettingsItemModel setTitle:@"BHTikTok++ settings"];
+        [BHTikTokSettingsItemModel setDetail:@"BHTikTok++ settings"];
         [BHTikTokSettingsItemModel setIconImage:[UIImage systemImageNamed:@"gear"]];
         [BHTikTokSettingsItemModel setType:99];
 
