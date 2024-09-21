@@ -1,6 +1,9 @@
 # BHTikTok++
 An awesome tweak for TikTok!
 
+# Telegram Channel 
+https://t.me/BHTikTokPlusPlus
+
 # Features
 - No Ads
 - Download Videos
