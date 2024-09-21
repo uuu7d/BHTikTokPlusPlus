@@ -401,6 +401,7 @@
         PSSpecifier *removeWatermark = [self newSwitchCellWithTitle:@"Remove Watermark" detailTitle:@"Removes watermark from default tiktok download button." key:@"remove_watermark" defaultValue:false changeAction:nil];
         PSSpecifier *uploadRegion = [self newSwitchCellWithTitle:@"Upload region" detailTitle:@"Shows country flag next to users name." key:@"upload_region" defaultValue:false changeAction:nil];
         PSSpecifier *autoPlay = [self newSwitchCellWithTitle:@"Auto Play Next Video" detailTitle:@"Play next video automatcilly when the post is finished" key:@"auto_play" defaultValue:false changeAction:nil];
+        PSSpecifier *stopPlay = [self newSwitchCellWithTitle:@"Stop Video Loop" detailTitle:@"Stop video automatcilly when the post is finished" key:@"stop_play" defaultValue:false changeAction:nil];
         PSSpecifier *hideElementButton = [self newSwitchCellWithTitle:@"Show/Hide UI button" detailTitle:@"A button on the main page to remove UI elements" key:@"remove_elements_button" defaultValue:true changeAction:nil];
         PSSpecifier *progressBar = [self newSwitchCellWithTitle:@"Show progress bar" detailTitle:nil key:@"show_porgress_bar" defaultValue:true changeAction:nil];
         PSSpecifier *transparentCommnet = [self newSwitchCellWithTitle:@"Transparent Comment Panel" detailTitle:nil key:@"transparent_commnet" defaultValue:false changeAction:nil];
@@ -449,6 +450,7 @@
             hideElementButton,
             uploadRegion,
             autoPlay,
+            stopPlay,
             progressBar,
             transparentCommnet,
             showUsername,

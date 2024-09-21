@@ -20,6 +20,9 @@
 + (BOOL)autoPlay {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"auto_play"];
 }
++ (BOOL)stopPlay {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"stop_play"];
+}
 + (BOOL)progressBar {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"show_porgress_bar"];
 }

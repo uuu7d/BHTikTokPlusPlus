@@ -8,6 +8,7 @@
 + (BOOL)hideElementButton;
 + (BOOL)uploadRegion;
 + (BOOL)autoPlay;
++ (BOOL)stopPlay;
 + (BOOL)progressBar;
 + (BOOL)transparentCommnet;
 + (BOOL)showUsername;

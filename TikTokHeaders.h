@@ -233,9 +233,9 @@
 }
 @end
 
-@interface AWEFeedCellViewController: AWEAwemeBaseViewController
-
+@interface AWEFeedCellViewController: AWEAwemeBaseViewController;
 @property (nonatomic, strong, readwrite) AWEAwemeModel *model;
+- (NSInteger)indexPath;
 @end
 
 @interface AWEAwemeDetailCellViewController: AWEAwemeBaseViewController
@@ -363,6 +363,8 @@
 @property(nonatomic, weak, readwrite) UIViewController *tabContainerController;
 @property (nonatomic, assign, readonly) AWEAwemeModel *currentAweme;
 - (void)scrollToNextVideo;
+- (void)pause;
+- (void)stop;
 @end
 
 static BOOL is_iPad() {

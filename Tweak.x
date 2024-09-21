@@ -486,6 +486,19 @@ static BOOL isAuthenticationShowed = FALSE;
     }
     %orig;
 }
+- (BOOL)loop {
+    if ([BHIManager stopPlay]) {
+        return 0;
+    }
+    return %orig;
+}
+- (void)setLoop:(BOOL)arg1 {
+    if ([BHIManager stopPlay]) {
+        %orig(0);
+    }else {
+        %orig;
+    }
+}
 %end
 
 %hook AWEMaskInfoModel // Disable Unsensitive Content
@@ -910,25 +923,25 @@ static BOOL isAuthenticationShowed = FALSE;
     }];
     [photosActions addObject:allPhotosAction];
     UIAction *action2 = [UIAction actionWithTitle:@"Download Music"
-                                            image:nil
+                                            image:[UIImage systemImageNamed:@"music.note"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadMusic:rootVC];
     }];
     UIAction *action3 = [UIAction actionWithTitle:@"Copy Music link"
-                                            image:nil
+                                            image:[UIImage systemImageNamed:@"link"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyMusic:rootVC];
     }];
     UIAction *action4 = [UIAction actionWithTitle:@"Copy Video link"
-                                            image:nil
+                                            image:[UIImage systemImageNamed:@"link"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyVideo:rootVC];
     }];
     UIAction *action5 = [UIAction actionWithTitle:@"Copy Decription"
-                                            image:nil
+                                            image:[UIImage systemImageNamed:@"note.text"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyDecription:rootVC];
@@ -967,25 +980,25 @@ static BOOL isAuthenticationShowed = FALSE;
     }];
     [photosActions addObject:allPhotosAction];
     UIAction *action2 = [UIAction actionWithTitle:@"Download Music"
-                                            image:nil
+                                            image:[UIImage systemImageNamed:@"music.note"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadMusic:rootVC];
     }];
     UIAction *action3 = [UIAction actionWithTitle:@"Copy Music link"
-                                            image:nil
+                                            image:[UIImage systemImageNamed:@"link"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyMusic:rootVC];
     }];
     UIAction *action4 = [UIAction actionWithTitle:@"Copy Video link"
-                                            image:nil
+                                            image:[UIImage systemImageNamed:@"link"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyVideo:rootVC];
     }];
     UIAction *action5 = [UIAction actionWithTitle:@"Copy Decription"
-                                            image:nil
+                                            image:[UIImage systemImageNamed:@"note.text"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyDecription:rootVC];
