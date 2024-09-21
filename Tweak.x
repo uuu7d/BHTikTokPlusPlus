@@ -490,7 +490,7 @@ static BOOL isAuthenticationShowed = FALSE;
     if ([BHIManager stopPlay]) {
         return 0;
     }
-    return %orig;
+    return %orig; 
 }
 - (void)setLoop:(BOOL)arg1 {
     if ([BHIManager stopPlay]) {
@@ -763,6 +763,19 @@ static BOOL isAuthenticationShowed = FALSE;
         ]];
     }
 }
+%new - (void)downloadHDVideo:(AWEAwemeBaseViewController *)rootVC {
+    NSString *as = rootVC.model.itemID;
+    NSURL *downloadableURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://tikwm.com/video/media/play/%@.mp4", as]];
+    self.fileextension = @"mp4";
+    if (downloadableURL) {
+        BHDownload *dwManager = [[BHDownload alloc] init];
+        [dwManager downloadFileWithURL:downloadableURL];
+        [dwManager setDelegate:self];
+        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        self.hud.textLabel.text = @"Downloading";
+        [self.hud showInView:topMostController().view];
+    }
+}
 %new - (void)downloadVideo:(AWEAwemeBaseViewController *)rootVC {
     NSString *as = rootVC.model.itemID;
     NSURL *downloadableURL = [rootVC.model.video.playURL bestURLtoDownload];
@@ -867,6 +880,12 @@ static BOOL isAuthenticationShowed = FALSE;
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadVideo:rootVC];
     }];
+        UIAction *action0 = [UIAction actionWithTitle:@"Download HD Video"
+                                            image:[UIImage systemImageNamed:@"film"]
+                                       identifier:nil
+                                          handler:^(__kindof UIAction * _Nonnull action) {
+                                            [self downloadHDVideo:rootVC];
+    }];
     UIAction *action2 = [UIAction actionWithTitle:@"Download Music"
                                             image:[UIImage systemImageNamed:@"music.note"]
                                        identifier:nil
@@ -892,7 +911,7 @@ static BOOL isAuthenticationShowed = FALSE;
                                             [self copyDecription:rootVC];
     }];
     UIMenu *downloadMenu = [UIMenu menuWithTitle:@"Downloads Menu"
-                                        children:@[action1, action2]];
+                                        children:@[action1, action0,action2]];
     UIMenu *copyMenu = [UIMenu menuWithTitle:@"Copy Menu"
                                         children:@[action3, action4, action5]];
     UIMenu *mainMenu = [UIMenu menuWithTitle:@"" children:@[downloadMenu, copyMenu]];
@@ -1129,6 +1148,19 @@ static BOOL isAuthenticationShowed = FALSE;
         ]];
     }
 }
+%new - (void)downloadHDVideo:(AWEAwemeBaseViewController *)rootVC {
+    NSString *as = rootVC.model.itemID;
+    NSURL *downloadableURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://tikwm.com/video/media/play/%@.mp4", as]];
+    self.fileextension = @"mp4";
+    if (downloadableURL) {
+        BHDownload *dwManager = [[BHDownload alloc] init];
+        [dwManager downloadFileWithURL:downloadableURL];
+        [dwManager setDelegate:self];
+        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        self.hud.textLabel.text = @"Downloading";
+        [self.hud showInView:topMostController().view];
+    }
+}
 %new - (void)downloadVideo:(AWEAwemeBaseViewController *)rootVC {
     NSString *as = rootVC.model.itemID;
     NSURL *downloadableURL = [rootVC.model.video.playURL bestURLtoDownload];
@@ -1192,6 +1224,12 @@ static BOOL isAuthenticationShowed = FALSE;
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadVideo:rootVC];
     }];
+    UIAction *action0 = [UIAction actionWithTitle:@"Download HD Video"
+                                            image:[UIImage systemImageNamed:@"film"]
+                                       identifier:nil
+                                          handler:^(__kindof UIAction * _Nonnull action) {
+                                            [self downloadHDVideo:rootVC];
+    }];
     UIAction *action2 = [UIAction actionWithTitle:@"Download Music"
                                             image:[UIImage systemImageNamed:@"music.note"]
                                        identifier:nil
@@ -1217,7 +1255,7 @@ static BOOL isAuthenticationShowed = FALSE;
                                             [self copyDecription:rootVC];
     }];
     UIMenu *downloadMenu = [UIMenu menuWithTitle:@"Downloads Menu"
-                                        children:@[action1, action2]];
+                                        children:@[action1, action0,action2]];
     UIMenu *copyMenu = [UIMenu menuWithTitle:@"Copy Menu"
                                         children:@[action3, action4, action5]];
     UIMenu *mainMenu = [UIMenu menuWithTitle:@"" children:@[downloadMenu, copyMenu]];

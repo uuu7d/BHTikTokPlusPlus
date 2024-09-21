@@ -41,5 +41,5 @@ An awesome tweak for TikTok!
 
 # TODO
 -  [ ] Add Localization for the tweak.
--  [ ] Add HD Download
+-  [x] Add HD Download
 -  [ ] Story Download

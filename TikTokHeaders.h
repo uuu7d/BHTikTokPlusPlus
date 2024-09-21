@@ -265,6 +265,7 @@
 - (void)downloadMusic:(AWEAwemeBaseViewController *)rootVC;
 - (void)copyMusic:(AWEAwemeBaseViewController *)rootVC;
 - (void)copyVideo:(AWEAwemeBaseViewController *)rootVC;
+- (void)downloadHDVideo:(AWEAwemeBaseViewController *)rootVC;
 - (void)copyDecription:(AWEAwemeBaseViewController *)rootVC;
 - (void)downloadPhotos:(TTKPhotoAlbumDetailCellController *)rootVC photoIndex:(unsigned long)index;
 - (void)downloadPhotos:(TTKPhotoAlbumDetailCellController *)rootVC;
@@ -288,6 +289,7 @@
 - (void)addDownloadButton;
 - (void) downloadButtonHandler:(UIButton *)sender;
 - (void)downloadVideo:(AWEAwemeBaseViewController *)rootVC;
+- (void)downloadHDVideo:(AWEAwemeBaseViewController *)rootVC;
 - (void)downloadMusic:(AWEAwemeBaseViewController *)rootVC;
 - (void)copyMusic:(AWEAwemeBaseViewController *)rootVC;
 - (void)copyVideo:(AWEAwemeBaseViewController *)rootVC;
