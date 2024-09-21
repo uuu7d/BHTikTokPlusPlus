@@ -378,8 +378,10 @@ static BOOL isAuthenticationShowed = FALSE;
 %hook TTKCommentPanelViewController
 - (void)viewDidLoad {
     %orig;
-    UIView *commnetView = [self view];
-    [commnetView setAlpha:0.90];
+    if ([BHIManager transparentCommnet]){
+        UIView *commnetView = [self view];
+        [commnetView setAlpha:0.90];
+    }
 }
 %end
 

@@ -9,6 +9,7 @@
 + (BOOL)uploadRegion;
 + (BOOL)autoPlay;
 + (BOOL)progressBar;
++ (BOOL)transparentCommnet;
 + (BOOL)showUsername;
 + (BOOL)disablePullToRefresh;
 + (BOOL)disableUnsensitive;

@@ -23,6 +23,9 @@
 + (BOOL)progressBar {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"show_porgress_bar"];
 }
++ (BOOL)transparentCommnet {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"transparent_commnet"];
+}
 + (BOOL)showUsername {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"show_username"];
 }
