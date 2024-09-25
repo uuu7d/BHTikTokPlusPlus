@@ -766,7 +766,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %new - (void)downloadHDVideo:(AWEAwemeBaseViewController *)rootVC {
     NSString *as = rootVC.model.itemID;
     NSURL *downloadableURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://tikwm.com/video/media/play/%@.mp4", as]];
-    self.fileextension = @"mp4";
+    self.fileextension = [rootVC.model.video.playURL bestURLtoDownloadFormat];
     if (downloadableURL) {
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
@@ -779,7 +779,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %new - (void)downloadVideo:(AWEAwemeBaseViewController *)rootVC {
     NSString *as = rootVC.model.itemID;
     NSURL *downloadableURL = [rootVC.model.video.playURL bestURLtoDownload];
-    self.fileextension = @"mp4";
+    self.fileextension = [rootVC.model.video.playURL bestURLtoDownloadFormat];
     if (downloadableURL) {
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
@@ -833,7 +833,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %new - (void)downloadMusic:(AWEAwemeBaseViewController *)rootVC {
     NSString *as = rootVC.model.itemID;
     NSURL *downloadableURL = [rootVC.model.video.playURL bestURLtoDownload];
-    self.fileextension = @"mp3";
+    self.fileextension = [((AWEMusicModel *)rootVC.model.music).playURL bestURLtoDownload];
     if (downloadableURL) {
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
@@ -1039,9 +1039,9 @@ static BOOL isAuthenticationShowed = FALSE;
     [hideElementButton setTranslatesAutoresizingMaskIntoConstraints:false];
     [hideElementButton addTarget:self action:@selector(hideElementButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
     if (self.elementsHidden) {
-        [hideElementButton setImage:[UIImage systemImageNamed:@"eye.fill"] forState:UIControlStateNormal];
+        [hideElementButton setImage:[UIImage systemImageNamed:@"eye"] forState:UIControlStateNormal];
     } else {
-        [hideElementButton setImage:[UIImage systemImageNamed:@"eye.slash.fill"] forState:UIControlStateNormal];
+        [hideElementButton setImage:[UIImage systemImageNamed:@"eye.slash"] forState:UIControlStateNormal];
     }
 
     if (![self viewWithTag:999]) {
@@ -1063,11 +1063,11 @@ static BOOL isAuthenticationShowed = FALSE;
         if (self.elementsHidden) {
             self.elementsHidden = false;
             [interactionController hideAllElements:false exceptArray:nil];
-            [sender setImage:[UIImage systemImageNamed:@"eye.slash.fill"] forState:UIControlStateNormal];
+            [sender setImage:[UIImage systemImageNamed:@"eye.slash"] forState:UIControlStateNormal];
         } else {
             self.elementsHidden = true;
             [interactionController hideAllElements:true exceptArray:nil];
-            [sender setImage:[UIImage systemImageNamed:@"eye.fill"] forState:UIControlStateNormal];
+            [sender setImage:[UIImage systemImageNamed:@"eye"] forState:UIControlStateNormal];
         }
     }
 }
@@ -1151,7 +1151,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %new - (void)downloadHDVideo:(AWEAwemeBaseViewController *)rootVC {
     NSString *as = rootVC.model.itemID;
     NSURL *downloadableURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://tikwm.com/video/media/play/%@.mp4", as]];
-    self.fileextension = @"mp4";
+    self.fileextension = [rootVC.model.video.playURL bestURLtoDownloadFormat];
     if (downloadableURL) {
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
@@ -1164,7 +1164,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %new - (void)downloadVideo:(AWEAwemeBaseViewController *)rootVC {
     NSString *as = rootVC.model.itemID;
     NSURL *downloadableURL = [rootVC.model.video.playURL bestURLtoDownload];
-        self.fileextension = @"mp4";
+        self.fileextension = [rootVC.model.video.playURL bestURLtoDownloadFormat];
     if (downloadableURL) {
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
@@ -1177,7 +1177,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %new - (void)downloadMusic:(AWEAwemeBaseViewController *)rootVC {
     NSString *as = rootVC.model.itemID;
     NSURL *downloadableURL = [rootVC.model.video.playURL bestURLtoDownload];
-        self.fileextension = @"mp3";
+        self.fileextension = [((AWEMusicModel *)rootVC.model.music).playURL bestURLtoDownload];
     if (downloadableURL) {
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
@@ -1269,9 +1269,9 @@ static BOOL isAuthenticationShowed = FALSE;
     [hideElementButton setTranslatesAutoresizingMaskIntoConstraints:false];
     [hideElementButton addTarget:self action:@selector(hideElementButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
     if (self.elementsHidden) {
-        [hideElementButton setImage:[UIImage systemImageNamed:@"eye.fill"] forState:UIControlStateNormal];
+        [hideElementButton setImage:[UIImage systemImageNamed:@"eye"] forState:UIControlStateNormal];
     } else {
-        [hideElementButton setImage:[UIImage systemImageNamed:@"eye.slash.fill"] forState:UIControlStateNormal];
+        [hideElementButton setImage:[UIImage systemImageNamed:@"eye.slash"] forState:UIControlStateNormal];
     }
 
     if (![self viewWithTag:999]) {
@@ -1293,11 +1293,11 @@ static BOOL isAuthenticationShowed = FALSE;
         if (self.elementsHidden) {
             self.elementsHidden = false;
             [interactionController hideAllElements:false exceptArray:nil];
-            [sender setImage:[UIImage systemImageNamed:@"eye.slash.fill"] forState:UIControlStateNormal];
+            [sender setImage:[UIImage systemImageNamed:@"eye.slash"] forState:UIControlStateNormal];
         } else {
             self.elementsHidden = true;
             [interactionController hideAllElements:true exceptArray:nil];
-            [sender setImage:[UIImage systemImageNamed:@"eye.fill"] forState:UIControlStateNormal];
+            [sender setImage:[UIImage systemImageNamed:@"eye"] forState:UIControlStateNormal];
         }
     }
 }
@@ -1308,7 +1308,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %new - (void)downloadDidFinish:(NSURL *)filePath Filename:(NSString *)fileName {
     NSString *DocPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
     NSFileManager *manager = [NSFileManager defaultManager];
-    NSURL *newFilePath = [[NSURL fileURLWithPath:DocPath] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", NSUUID.UUID.UUIDString, @"mp4"]];
+    NSURL *newFilePath = [[NSURL fileURLWithPath:DocPath] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", NSUUID.UUID.UUIDString, self.fileextension]];
     [manager moveItemAtURL:filePath toURL:newFilePath error:nil];
 
     [self.hud dismiss];

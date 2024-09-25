@@ -7,6 +7,7 @@ https://t.me/BHTikTokPlusPlus
 # Features
 - No Ads
 - Download Videos
+- Download HD Videos
 - Download Photos
 - Download Musics
 - Upload Region
