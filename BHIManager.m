@@ -8,6 +8,9 @@
 + (BOOL)downloadButton {
      return [[NSUserDefaults standardUserDefaults] boolForKey:@"download_button"];
 }
++ (BOOL)shareSheet {
+     return [[NSUserDefaults standardUserDefaults] boolForKey:@"share_sheet"];
+}
 + (BOOL)removeWatermark {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"remove_watermark"];
 }
@@ -168,6 +171,26 @@
         acVC.popoverPresentationController.sourceRect = CGRectMake(topMostController().view.bounds.size.width / 2.0, topMostController().view.bounds.size.height / 2.0, 1.0, 1.0);
     }
     [topMostController() presentViewController:acVC animated:true completion:nil];
+}
++ (void)saveMedia:(id)newFilePath fileExtension:(id)fileextension {
+    NSArray *imageExtensions = @[@"png", @"jpg", @"jpeg", @"gif", @"tiff", @"bmp", @"heif", @"heic", @"svg"];
+    NSArray *videoExtensions = @[@"mp4", @"mov", @"avi", @"mkv", @"wmv", @"flv", @"webm"];
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        PHAssetResourceCreationOptions *options = [[PHAssetResourceCreationOptions alloc] init];
+        if ([videoExtensions containsObject:fileextension]) {
+            [[PHAssetCreationRequest creationRequestForAsset] addResourceWithType:PHAssetResourceTypeVideo fileURL:newFilePath options:options];
+        } else if ([imageExtensions containsObject:fileextension]) {
+            [[PHAssetCreationRequest creationRequestForAsset] addResourceWithType:PHAssetResourceTypePhoto fileURL:newFilePath options:options];
+        } else {
+            NSLog(@"Unsupported file type: %@", fileextension);
+        }
+    } completionHandler:^(BOOL success, NSError * _Nullable error) {
+        if (success) {
+            NSLog(@"Media saved to Camera Roll successfully.");
+        } else {
+            NSLog(@"Error saving media to Camera Roll: %@", error);
+        }
+    }];
 }
 
 + (NSString *)getDownloadingPersent:(float)per {

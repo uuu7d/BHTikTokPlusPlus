@@ -398,6 +398,7 @@
         
         PSSpecifier *hideAds = [self newSwitchCellWithTitle:@"No Ads" detailTitle:@"Remove all Ads from TikTok app" key:@"hide_ads" defaultValue:true changeAction:nil];
         PSSpecifier *downloadButton = [self newSwitchCellWithTitle:@"Download button" detailTitle:@"Shows a download button in feed to download video, music, photos, and also to copy music link, video link, description text." key:@"download_button" defaultValue:false changeAction:nil];
+        PSSpecifier *shareSheet = [self newSwitchCellWithTitle:@"Share Sheet" detailTitle:@"when video is downloaded a share-sheet will pop up" key:@"share_sheet" defaultValue:false changeAction:nil];
         PSSpecifier *removeWatermark = [self newSwitchCellWithTitle:@"Remove Watermark" detailTitle:@"Removes watermark from default tiktok download button." key:@"remove_watermark" defaultValue:false changeAction:nil];
         PSSpecifier *uploadRegion = [self newSwitchCellWithTitle:@"Upload region" detailTitle:@"Shows country flag next to users name." key:@"upload_region" defaultValue:false changeAction:nil];
         PSSpecifier *autoPlay = [self newSwitchCellWithTitle:@"Auto Play Next Video" detailTitle:@"Play next video automatcilly when the post is finished" key:@"auto_play" defaultValue:false changeAction:nil];
@@ -446,6 +447,7 @@
             feedSection, // 1
             hideAds,
             downloadButton,
+            shareSheet,
             removeWatermark,
             hideElementButton,
             uploadRegion,

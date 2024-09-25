@@ -833,7 +833,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %new - (void)downloadMusic:(AWEAwemeBaseViewController *)rootVC {
     NSString *as = rootVC.model.itemID;
     NSURL *downloadableURL = [rootVC.model.video.playURL bestURLtoDownload];
-    self.fileextension = [((AWEMusicModel *)rootVC.model.music).playURL bestURLtoDownload];
+    self.fileextension = @"mp3";
     if (downloadableURL) {
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
@@ -1077,7 +1077,14 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 %new - (void)downloaderDidFinishDownloadingAllFiles:(NSMutableArray<NSURL *> *)downloadedFilePaths {
     [self.hud dismiss];
-    [BHIManager showSaveVC:downloadedFilePaths];
+    if ([BHIManager shareSheet]) {
+        [BHIManager showSaveVC:downloadedFilePaths];
+    }
+    else {
+        for (NSURL *url in downloadedFilePaths) {
+            [BHIManager saveMedia:url fileExtension:self.fileextension];
+        }
+    }
 }
 %new - (void)downloaderDidFailureWithError:(NSError *)error {
     if (error) {
@@ -1093,9 +1100,14 @@ static BOOL isAuthenticationShowed = FALSE;
     NSFileManager *manager = [NSFileManager defaultManager];
     NSURL *newFilePath = [[NSURL fileURLWithPath:DocPath] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", NSUUID.UUID.UUIDString, self.fileextension]];
     [manager moveItemAtURL:filePath toURL:newFilePath error:nil];
-
     [self.hud dismiss];
-    [BHIManager showSaveVC:@[newFilePath]];
+    NSArray *audioExtensions = @[@"mp3", @"aac", @"wav", @"m4a", @"ogg", @"flac", @"aiff", @"wma"];
+    if ([BHIManager shareSheet] || [audioExtensions containsObject:self.fileextension]) {
+        [BHIManager showSaveVC:@[newFilePath]];
+    }
+    else {
+        [BHIManager saveMedia:newFilePath fileExtension:self.fileextension];
+    }
 }
 %new - (void)downloadDidFailureWithError:(NSError *)error {
     if (error) {
@@ -1177,7 +1189,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %new - (void)downloadMusic:(AWEAwemeBaseViewController *)rootVC {
     NSString *as = rootVC.model.itemID;
     NSURL *downloadableURL = [rootVC.model.video.playURL bestURLtoDownload];
-        self.fileextension = [((AWEMusicModel *)rootVC.model.music).playURL bestURLtoDownload];
+        self.fileextension = @"mp3";
     if (downloadableURL) {
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
@@ -1310,9 +1322,14 @@ static BOOL isAuthenticationShowed = FALSE;
     NSFileManager *manager = [NSFileManager defaultManager];
     NSURL *newFilePath = [[NSURL fileURLWithPath:DocPath] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", NSUUID.UUID.UUIDString, self.fileextension]];
     [manager moveItemAtURL:filePath toURL:newFilePath error:nil];
-
     [self.hud dismiss];
-    [BHIManager showSaveVC:@[newFilePath]];
+    NSArray *audioExtensions = @[@"mp3", @"aac", @"wav", @"m4a", @"ogg", @"flac", @"aiff", @"wma"];
+    if ([BHIManager shareSheet] || [audioExtensions containsObject:self.fileextension]) {
+        [BHIManager showSaveVC:@[newFilePath]];
+    }
+    else {
+        [BHIManager saveMedia:newFilePath fileExtension:self.fileextension];
+    }
 }
 %new - (void)downloadDidFailureWithError:(NSError *)error {
     if (error) {

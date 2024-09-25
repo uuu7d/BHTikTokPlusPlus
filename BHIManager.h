@@ -4,6 +4,7 @@
 @interface BHIManager: NSObject
 + (BOOL)hideAds;
 + (BOOL)downloadButton;
++ (BOOL)shareSheet;
 + (BOOL)removeWatermark;
 + (BOOL)hideElementButton;
 + (BOOL)uploadRegion;
@@ -39,4 +40,5 @@
 + (void)cleanCache;
 + (BOOL)isEmpty:(NSURL *)url;
 + (NSString *)getDownloadingPersent:(float)per;
++ (void)saveMedia:(id)item fileExtension:(id)fileExtension;
 @end
