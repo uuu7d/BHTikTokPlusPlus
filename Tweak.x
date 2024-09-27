@@ -765,7 +765,7 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 %new - (void)downloadHDVideo:(AWEAwemeBaseViewController *)rootVC {
     NSString *as = rootVC.model.itemID;
-    NSURL *downloadableURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://tikwm.com/video/media/play/%@.mp4", as]];
+    NSURL *downloadableURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://tikwm.com/video/media/hdplay/%@.mp4", as]];
     self.fileextension = [rootVC.model.video.playURL bestURLtoDownloadFormat];
     if (downloadableURL) {
         BHDownload *dwManager = [[BHDownload alloc] init];
@@ -1162,7 +1162,7 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 %new - (void)downloadHDVideo:(AWEAwemeBaseViewController *)rootVC {
     NSString *as = rootVC.model.itemID;
-    NSURL *downloadableURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://tikwm.com/video/media/play/%@.mp4", as]];
+    NSURL *downloadableURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://tikwm.com/video/media/hdplay/%@.mp4", as]];
     self.fileextension = [rootVC.model.video.playURL bestURLtoDownloadFormat];
     if (downloadableURL) {
         BHDownload *dwManager = [[BHDownload alloc] init];
