@@ -270,6 +270,7 @@
 - (void)copyDecription:(AWEAwemeBaseViewController *)rootVC;
 - (void)downloadPhotos:(TTKPhotoAlbumDetailCellController *)rootVC photoIndex:(unsigned long)index;
 - (void)downloadPhotos:(TTKPhotoAlbumDetailCellController *)rootVC;
+- (void)tapDownloadVideo;
 @end
 @interface AWEFeedViewTemplateCell () <BHDownloadDelegate, BHMultipleDownloadDelegate>
 @end

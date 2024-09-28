@@ -343,6 +343,144 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 %end
 
+%hook TIKTOKRegionManager
++ (NSString *)systemRegion {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return @"JP";
+        }
+        return %orig;
+    }
+    return %orig;
+}
++ (id)storeRegion {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return @"JP";
+        }
+        return %orig;
+    }
+    return %orig;
+}
+%end
+
+%hook ATSRegionCacheManager
+- (id)getRegion {
+ if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return [selectedRegion[@"code"] lowercaseString];
+        }
+        return %orig;
+    }
+    return %orig;
+}
+- (id)storeRegionFromCache {
+ if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return [selectedRegion[@"code"] lowercaseString];
+        }
+        return %orig;
+    }
+    return %orig;
+}
+- (id)storeRegionFromTTNetNotification:(id)arg1 {
+ if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return [selectedRegion[@"code"] lowercaseString];
+        }
+        return %orig;
+    }
+    return %orig;
+}
+- (void)setRegion:(id)arg1 {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return %orig([selectedRegion[@"code"] lowercaseString]);
+        }
+        return %orig(arg1);
+    }
+    return %orig(arg1);
+}
+- (id)region {
+ if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return [selectedRegion[@"code"] lowercaseString];
+        }
+        return %orig;
+    }
+    return %orig;
+}
+%end
+
+%hook TTKStoreRegionModel
+- (id)storeRegion {
+ if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return selectedRegion[@"code"];
+        }
+        return %orig;
+    }
+    return %orig;
+}
+- (void)setStoreRegion:(id)arg1 {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return %orig(selectedRegion[@"code"]);
+        }
+        return %orig(arg1);
+    }
+    return %orig(arg1);
+}
+%end
+
+%hook TTInstallIDManager
+- (id)currentAppRegion {
+ if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return selectedRegion[@"code"];
+        }
+        return %orig;
+    }
+    return %orig;
+}
+- (void)setCurrentAppRegion:(id)agr1 {
+    %orig(@"JP");
+}
+%end
+
+%hook BDInstallGlobalConfig
+- (id)currentAppRegion {
+ if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return selectedRegion[@"code"];
+        }
+        return %orig;
+    }
+    return %orig;
+}
+- (void)setCurrentAppRegion:(id)arg1 {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return %orig(selectedRegion[@"code"]);
+        }
+        return %orig(arg1);
+    }
+    return %orig(arg1);
+}
+%end
+
 %hook ACCCreationPublishAction
 - (BOOL)is_open_hd {
     if ([BHIManager uploadHD]) {
