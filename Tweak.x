@@ -863,6 +863,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %property (nonatomic, retain) NSString *fileextension;
 - (void)configWithModel:(id)model {
     %orig;
+    self.hud.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
     [self addHandleLongPress];
     self.elementsHidden = false;
     if ([BHIManager downloadButton]){
@@ -874,6 +875,7 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 - (void)configureWithModel:(id)model {
     %orig;
+    self.hud.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
     [self addHandleLongPress];
     self.elementsHidden = false;
     if ([BHIManager downloadButton]){
@@ -1232,6 +1234,10 @@ static BOOL isAuthenticationShowed = FALSE;
 
 %new - (void)downloadProgress:(float)progress {
     self.hud.detailTextLabel.text = [BHIManager getDownloadingPersent:progress];
+    self.hud.tapOutsideBlock = ^(JGProgressHUD * _Nonnull HUD) {
+        self.hud.textLabel.text = @"Backgrounding ✌️";
+        [self.hud dismissAfterDelay:0.4];
+    };
 }
 %new - (void)downloadDidFinish:(NSURL *)filePath Filename:(NSString *)fileName {
     NSString *DocPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
@@ -1453,6 +1459,10 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 
 %new - (void)downloadProgress:(float)progress {
+        self.hud.tapOutsideBlock = ^(JGProgressHUD * _Nonnull HUD) {
+        self.hud.textLabel.text = @"Backgrounding ✌️";
+        [self.hud dismissAfterDelay:0.4];
+    };
     self.hud.detailTextLabel.text = [BHIManager getDownloadingPersent:progress];
 }
 %new - (void)downloadDidFinish:(NSURL *)filePath Filename:(NSString *)fileName {
