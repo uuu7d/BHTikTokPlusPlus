@@ -256,6 +256,7 @@
 @property(nonatomic, assign) BOOL elementsHidden;
 @property (nonatomic, strong) JGProgressHUD *hud;
 @property (nonatomic, retain) NSString *fileextension;
+@property (nonatomic, retain) UIProgressView *progressView;
 - (void)addHandleLongPress;
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender;
 - (void)addHideElementButton;
@@ -284,6 +285,7 @@
 @property(nonatomic, assign) BOOL elementsHidden;
 @property (nonatomic, strong) JGProgressHUD *hud;
 @property (nonatomic, retain) NSString *fileextension;
+@property (nonatomic, retain) UIProgressView *progressView;
 - (void)addHandleLongPress;
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender;
 - (void)addHideElementButton;
