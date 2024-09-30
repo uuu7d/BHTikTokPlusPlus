@@ -156,6 +156,8 @@
 }
 - (NSArray *)specifiers {
     if (!_specifiers) {
+        NSArray *speedTitles = @[@"0.5x", @"1.0x", @"1.5x", @"2.0x", @"3.0x"];
+        NSArray *speedValues = @[@(0.5), @(1.0), @(1.5), @(2.0), @(3.0)];
         NSArray *regionTitles = @[@"Saudi Arabia 🇸🇦", @"Taiwan 🇹🇼", @"Hong Kong 🇭🇰", @"Macao 🇲🇴", @"Japan 🇯🇵", @"South Korea 🇰🇷", @"United Kingdom 🇬🇧", @"United States 🇺🇸", @"Australia 🇦🇺", @"Canada 🇨🇦", @"Argentina 🇦🇷", @"Philippines 🇵🇭", @"Laos 🇱🇦", @"Malaysia 🇲🇾", @"Thailand 🇹🇭", @"Singapore 🇸🇬", @"Indonesia 🇮🇩", @"Vietnam 🇻🇳", @"Anguilla 🇦🇮", @"Panama 🇵🇦", @"Germany 🇩🇪", @"Russia 🇷🇺", @"France 🇫🇷", @"Finland 🇫🇮", @"Italy 🇮🇹", @"Pakistan 🇵🇰", @"Denmark 🇩🇰", @"Norway 🇳🇴", @"Sudan 🇸🇩", @"Romania 🇷🇴", @"United Arab Emirates 🇦🇪", @"Egypt 🇪🇬", @"Lebanon 🇱🇧", @"Mexico 🇲🇽", @"Brazil 🇧🇷", @"Turkey 🇹🇷", @"Kuwait 🇰🇼", @"Algeria 🇩🇿"];
         NSArray *regionCodes = @[
             @{
@@ -430,6 +432,8 @@
         PSSpecifier *regionSwitch = [self newSwitchCellWithTitle:@"Enable changing region" detailTitle:nil key:@"en_region" defaultValue:false changeAction:nil];
         PSSpecifier *regions = [self newLinkListCellWithTitle:@"Regions" key:@"region" defaultValue:@0 dynamicRule:@"en_region, ==, 0" validTitles:regionTitles validValues:regionCodes];
         
+        PSSpecifier *speedSwitch = [self newSwitchCellWithTitle:@"Enable Playback Speed" detailTitle:nil key:@"en_speed" defaultValue:false changeAction:nil];
+        PSSpecifier *speeds = [self newLinkListCellWithTitle:@"Speeds" key:@"speed" defaultValue:@1.0 dynamicRule:@"en_speed, ==, 0" validTitles:speedTitles validValues:speedValues];
         PSSpecifier *fakeVerified = [self newSwitchCellWithTitle:@"Fake verify blue mark" detailTitle:nil key:@"fake_verify" defaultValue:false changeAction:nil];
         PSSpecifier *fakeChangesEnabled = [self newSwitchCellWithTitle:@"Enable fake options" detailTitle:nil key:@"en_fake" defaultValue:false changeAction:nil];
         PSSpecifier *followerCount = [self newEditTextCellWithLabel:@"Follower count" placeholder:nil keyboardType:@"decimalPad" dynamicRule:@"en_fake, ==, 0" key:@"follower_count"];
@@ -440,7 +444,7 @@
         // dvelopers section
         PSSpecifier *raul = [self newHBTwitterCellWithTitle:@"Ashad Saeed" twitterUsername:@"Ashad__Saeed" customAvatarURL:@"https://unavatar.io/github/raulsaeed"];
         PSSpecifier *github = [self newHBLinkCellWithTitle:@"Github" detailTitle:@"My Github Page" url:@"https://github.com/raulsaeed"];
-        PSSpecifier *tipJar = [self newHBLinkCellWithTitle:@"Tip Jar" detailTitle:@"Donate Via Paypal" url:@"https://www.paypal.me/BandarHL"];
+        PSSpecifier *tipJar = [self newHBLinkCellWithTitle:@"Buy Me A Coffee" detailTitle:@"Buy Me A Coffee to keep the project free & updated." url:@"https://buymeacoffee.com/raulsaeed79"];
         
         _specifiers = [NSMutableArray arrayWithArray:@[
             
@@ -481,6 +485,8 @@
             countrySection, // 4
             regionSwitch,
             regions,
+            speedSwitch,
+            speeds,
 
             fakeSection, // 5
             fakeVerified,

@@ -29,7 +29,9 @@
 + (BOOL)videoUploadDate;
 + (BOOL)alwaysOpenSafari;
 + (BOOL)regionChangingEnabled;
-+ (NSDictionary *)selectedRegion;
++ (NSNumber *)selectedRegion;
++ (BOOL)speedEnabled;
++ (NSDictionary *)selectedSpeed;
 + (BOOL)fakeChangesEnabled;
 + (BOOL)fakeVerified;
 + (BOOL)uploadHD;

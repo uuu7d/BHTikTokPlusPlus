@@ -45,6 +45,17 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 %end
 
+%hook AWEPlayVideoPlayerController
+- (void)setPlaybackRate:(CGFloat)arg1 {
+     if ([BHIManager speedEnabled]) {
+        NSNumber *number = [BHIManager selectedSpeed];
+        %orig([number floatValue]);
+    } else {
+        %orig;
+    }
+}
+%end
+
 %hook AWEUserWorkCollectionViewCell
 - (void)configWithModel:(id)arg1 isMine:(BOOL)arg2 { // Video like count & upload date lables
     %orig;

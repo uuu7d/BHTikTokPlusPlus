@@ -77,6 +77,12 @@
 + (BOOL)regionChangingEnabled {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"en_region"];
 }
++ (BOOL)speedEnabled {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"en_speed"];
+}
++ (NSNumber *)selectedSpeed {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"speed"];
+}
 + (BOOL)videoLikeCount {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"video_like_count"];
 }
