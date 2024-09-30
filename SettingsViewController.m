@@ -393,6 +393,7 @@
         PSSpecifier *feedSection = [self newSectionWithTitle:@"Feed" footer:nil];
         PSSpecifier *profileSection = [self newSectionWithTitle:@"Profile" footer:nil];
         PSSpecifier *countrySection = [self newSectionWithTitle:@"Country" footer:nil];
+        PSSpecifier *playbackSpeed = [self newSectionWithTitle:@"Playback Speed" footer:nil];
         PSSpecifier *confirmationSection = [self newSectionWithTitle:@"Confirmation" footer:nil];
         PSSpecifier *fakeSection = [self newSectionWithTitle:@"Fake" footer:@"if you want the default value leave it blank."];
         PSSpecifier *securitySection = [self newSectionWithTitle:@"Security" footer:nil];
@@ -485,6 +486,8 @@
             countrySection, // 4
             regionSwitch,
             regions,
+
+            playbackSpeed,
             speedSwitch,
             speeds,
 
