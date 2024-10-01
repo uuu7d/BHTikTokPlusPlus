@@ -868,6 +868,21 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 %end
 
+%hook AWELiveFeedEntranceView
+- (void)switchStateWithTapped:(BOOL)arg1 {
+    if (![BHIManager liveActionEnabled] || [BHIManager selectedLiveAction] == 0) {
+        %orig;
+    } else if ([BHIManager liveActionEnabled] && [[BHIManager selectedLiveAction] intValue] == 1) {
+        UINavigationController *BHTikTokSettings = [[UINavigationController alloc] initWithRootViewController:[[SettingsViewController alloc] init]];
+        [topMostController() presentViewController:BHTikTokSettings animated:true completion:nil];
+    } else {
+        %orig;
+    }
+
+}
+%end
+
+
 %hook AWEFeedViewTemplateCell
 %property (nonatomic, strong) JGProgressHUD *hud;
 %property(nonatomic, assign) BOOL elementsHidden;

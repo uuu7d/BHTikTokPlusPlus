@@ -30,6 +30,8 @@
 + (BOOL)alwaysOpenSafari;
 + (BOOL)regionChangingEnabled;
 + (NSNumber *)selectedRegion;
++ (NSNumber *)selectedLiveAction;
++ (BOOL)liveActionEnabled;
 + (BOOL)speedEnabled;
 + (NSDictionary *)selectedSpeed;
 + (BOOL)fakeChangesEnabled;

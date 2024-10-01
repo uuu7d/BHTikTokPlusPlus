@@ -158,6 +158,8 @@
     if (!_specifiers) {
         NSArray *speedTitles = @[@"0.5x", @"1.0x", @"1.5x", @"2.0x", @"3.0x"];
         NSArray *speedValues = @[@(0.5), @(1.0), @(1.5), @(2.0), @(3.0)];
+        NSArray *liveFuncTitles = @[@"Default", @"BHTikTok++ Settings"];
+        NSArray *liveFuncValues = @[@0, @1];
         NSArray *regionTitles = @[@"Saudi Arabia 🇸🇦", @"Taiwan 🇹🇼", @"Hong Kong 🇭🇰", @"Macao 🇲🇴", @"Japan 🇯🇵", @"South Korea 🇰🇷", @"United Kingdom 🇬🇧", @"United States 🇺🇸", @"Australia 🇦🇺", @"Canada 🇨🇦", @"Argentina 🇦🇷", @"Philippines 🇵🇭", @"Laos 🇱🇦", @"Malaysia 🇲🇾", @"Thailand 🇹🇭", @"Singapore 🇸🇬", @"Indonesia 🇮🇩", @"Vietnam 🇻🇳", @"Anguilla 🇦🇮", @"Panama 🇵🇦", @"Germany 🇩🇪", @"Russia 🇷🇺", @"France 🇫🇷", @"Finland 🇫🇮", @"Italy 🇮🇹", @"Pakistan 🇵🇰", @"Denmark 🇩🇰", @"Norway 🇳🇴", @"Sudan 🇸🇩", @"Romania 🇷🇴", @"United Arab Emirates 🇦🇪", @"Egypt 🇪🇬", @"Lebanon 🇱🇧", @"Mexico 🇲🇽", @"Brazil 🇧🇷", @"Turkey 🇹🇷", @"Kuwait 🇰🇼", @"Algeria 🇩🇿"];
         NSArray *regionCodes = @[
             @{
@@ -393,7 +395,8 @@
         PSSpecifier *feedSection = [self newSectionWithTitle:@"Feed" footer:nil];
         PSSpecifier *profileSection = [self newSectionWithTitle:@"Profile" footer:nil];
         PSSpecifier *countrySection = [self newSectionWithTitle:@"Country" footer:nil];
-        PSSpecifier *playbackSpeed = [self newSectionWithTitle:@"Playback Speed" footer:nil];
+        PSSpecifier *playbackSection = [self newSectionWithTitle:@"Playback Speed" footer:nil];
+        PSSpecifier *liveActionSection = [self newSectionWithTitle:@"Custom Live Button Action" footer:@"Change the Default Live Button Action"];
         PSSpecifier *confirmationSection = [self newSectionWithTitle:@"Confirmation" footer:nil];
         PSSpecifier *fakeSection = [self newSectionWithTitle:@"Fake" footer:@"if you want the default value leave it blank."];
         PSSpecifier *securitySection = [self newSectionWithTitle:@"Security" footer:nil];
@@ -441,6 +444,9 @@
         PSSpecifier *followingCount = [self newEditTextCellWithLabel:@"Following count" placeholder:nil keyboardType:@"decimalPad" dynamicRule:@"en_fake, ==, 0" key:@"following_count"];
 
         PSSpecifier *appLock = [self newSwitchCellWithTitle:@"Padlock" detailTitle:@"Lock TikTok with passcode" key:@"padlock" defaultValue:false changeAction:nil];
+
+        PSSpecifier *liveAction = [self newSwitchCellWithTitle:@"Live Button Action" detailTitle:nil key:@"en_livefunc" defaultValue:false changeAction:nil];
+        PSSpecifier *liveButtonAction = [self newLinkListCellWithTitle:@"Live Action" key:@"live_action" defaultValue:@0 dynamicRule:@"en_livefunc, ==, 0" validTitles:liveFuncTitles validValues:liveFuncValues];
         
         // dvelopers section
         PSSpecifier *raul = [self newHBTwitterCellWithTitle:@"Ashad Saeed" twitterUsername:@"Ashad__Saeed" customAvatarURL:@"https://unavatar.io/github/raulsaeed"];
@@ -487,9 +493,13 @@
             regionSwitch,
             regions,
 
-            playbackSpeed,
+            playbackSection,
             speedSwitch,
             speeds,
+
+            liveActionSection,
+            liveAction,
+            liveButtonAction,
 
             fakeSection, // 5
             fakeVerified,

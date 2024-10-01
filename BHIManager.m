@@ -80,6 +80,12 @@
 + (BOOL)speedEnabled {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"en_speed"];
 }
++ (BOOL)liveActionEnabled {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"en_livefunc"];
+}
++ (NSNumber *)selectedLiveAction {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"live_action"];
+}
 + (NSNumber *)selectedSpeed {
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"speed"];
 }
