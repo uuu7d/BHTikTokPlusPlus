@@ -704,24 +704,67 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 %end
 
-%hook UIStackView 
-- (void)layoutSubviews { // experiment follower, following Count fake, TODO: make this piece of 💩 better
-    %orig;
-    if ([self.yy_viewController isKindOfClass:%c(TTKProfileHomeViewController)] && [self.subviews count] == 2 && [BHIManager fakeChangesEnabled]) {
-        NSString *fakeCountString = [[NSUserDefaults standardUserDefaults] stringForKey:@"follower_count"];
-        if ([[[self subviews] objectAtIndex:1] isKindOfClass:%c(UILabel)] && [[[[self subviews] objectAtIndex:1] text] isEqualToString:@"Followers"] && !(fakeCountString.length == 0)) {
-            UILabel *followers = [[self subviews] objectAtIndex:0];
-            followers.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"follower_count"];
-        }
-    }
-    if ([self.yy_viewController isKindOfClass:%c(TTKProfileHomeViewController)] && [self.subviews count] == 2 && [BHIManager fakeChangesEnabled]) {
-        NSString *fakeCountString = [[NSUserDefaults standardUserDefaults] stringForKey:@"follower_count"];
-        if ([[[self subviews] objectAtIndex:1] isKindOfClass:%c(UILabel)] && [[[[self subviews] objectAtIndex:1] text] isEqualToString:@"Following"] && !(fakeCountString.length == 0)) {
-            UILabel *followers = [[self subviews] objectAtIndex:0];
-            followers.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"following_count"];
-        }
-    }
+%hook TTKProfileBaseComponentModel // Fake Followers, Fake Following and FakeVerified.
+
+- (NSDictionary *)bizData {
+	if ([BHIManager fakeChangesEnabled]) {
+		NSDictionary *originalData = %orig;
+		NSMutableDictionary *modifiedData = [originalData mutableCopy];
+		
+		NSNumber *fakeFollowingCount = [self numberFromUserDefaultsForKey:@"following_count"];
+		NSNumber *fakeFollowersCount = [self numberFromUserDefaultsForKey:@"follower_count"];
+		
+		if ([self.componentID isEqualToString:@"relation_info_follower"]) {
+			modifiedData[@"follower_count"] = fakeFollowersCount ?: @0; 
+		} else if ([self.componentID isEqualToString:@"relation_info_following"]) {
+			modifiedData[@"following_count"] = fakeFollowingCount ?: @0; 
+			modifiedData[@"formatted_number"] = [self formattedStringFromNumber:fakeFollowingCount ?: @0];
+		} 
+		return [modifiedData copy];
+	}
+	return %orig;
 }
+
+- (NSArray *)components {
+	if ([BHIManager fakeVerified]) {
+		NSArray *originalComponents = %orig;
+		if ([self.componentID isEqualToString:@"user_account_base_info"] && originalComponents.count == 1) {
+			NSMutableArray *modifiedComponents = [originalComponents mutableCopy];
+			TTKProfileBaseComponentModel *fakeVerify = [%c(TTKProfileBaseComponentModel) new];
+			fakeVerify.componentID = @"user_account_verify";
+			fakeVerify.name = @"user_account_verify";
+			[modifiedComponents addObject:fakeVerify];
+			return [modifiedComponents copy];
+		}
+	}
+	return %orig;
+}
+
+%new - (NSNumber *)numberFromUserDefaultsForKey:(NSString *)key {
+    NSString *stringValue = [[NSUserDefaults standardUserDefaults] stringForKey:key];
+    return (stringValue.length > 0) ? @([stringValue doubleValue]) : @0; 
+}
+
+%new - (NSString *)formattedStringFromNumber:(NSNumber *)number {
+    if (!number) return @"0"; 
+
+    double value = [number doubleValue];
+    if (value == 0) return @"0"; 
+
+    NSString *formattedString;
+    if (value >= 1e9) {
+        formattedString = [NSString stringWithFormat:@"%.1fB", value / 1e9];
+    } else if (value >= 1e6) {
+        formattedString = [NSString stringWithFormat:@"%.1fM", value / 1e6];
+    } else if (value >= 1e3) {
+        formattedString = [NSString stringWithFormat:@"%.1fk", value / 1e3];
+    } else {
+        formattedString = [NSString stringWithFormat:@"%.0f", value];
+    }
+
+    return formattedString;
+}
+
 %end
 
 %hook AWEFeedVideoButton // like feed confirmation
