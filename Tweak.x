@@ -896,7 +896,7 @@ static BOOL isAuthenticationShowed = FALSE;
     self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     self.hud.indicatorView = self.progressView;
     [self addHandleLongPress];
-    self.elementsHidden = false;
+
     if ([BHIManager downloadButton]){
         [self addDownloadButton];
     }
@@ -912,7 +912,7 @@ static BOOL isAuthenticationShowed = FALSE;
     self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     self.hud.indicatorView = self.progressView;
     [self addHandleLongPress];
-    self.elementsHidden = false;
+
     if ([BHIManager downloadButton]){
         [self addDownloadButton];
     }
@@ -1303,7 +1303,6 @@ static BOOL isAuthenticationShowed = FALSE;
     self.hud.square = NO;
     self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     self.hud.indicatorView = self.progressView;
-    self.elementsHidden = false;
     if ([BHIManager downloadButton]){
         [self addDownloadButton];
     }
@@ -1318,7 +1317,6 @@ static BOOL isAuthenticationShowed = FALSE;
     self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     self.hud.indicatorView = self.progressView;
     [self addHandleLongPress];
-    self.elementsHidden = false;
     if ([BHIManager downloadButton]){
         [self addDownloadButton];
     }
