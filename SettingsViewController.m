@@ -493,10 +493,6 @@
             regionSwitch,
             regions,
 
-            playbackSection,
-            speedSwitch,
-            speeds,
-
             liveActionSection,
             liveAction,
             liveButtonAction,

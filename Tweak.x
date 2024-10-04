@@ -47,12 +47,13 @@ static BOOL isAuthenticationShowed = FALSE;
 
 %hook AWEPlayVideoPlayerController
 - (void)setPlaybackRate:(CGFloat)arg1 {
-     if ([BHIManager speedEnabled]) {
+    %orig;
+/*      if ([BHIManager speedEnabled]) {
         NSNumber *number = [BHIManager selectedSpeed];
         %orig([number floatValue]);
     } else {
         %orig;
-    }
+    } */
 }
 %end
 
@@ -934,6 +935,7 @@ static BOOL isAuthenticationShowed = FALSE;
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
         [dwManager setDelegate:self];
+        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         self.hud.textLabel.text = @"Downloading";
         [self.hud showInView:topMostController().view];
     }
@@ -946,6 +948,7 @@ static BOOL isAuthenticationShowed = FALSE;
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
         [dwManager setDelegate:self];
+        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         self.hud.textLabel.text = @"Downloading";
         [self.hud showInView:topMostController().view];
     }
@@ -961,6 +964,7 @@ static BOOL isAuthenticationShowed = FALSE;
                     BHDownload *dwManager = [[BHDownload alloc] init];
                     [dwManager downloadFileWithURL:downloadableURL];
                     [dwManager setDelegate:self];
+                    self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
                     self.hud.textLabel.text = @"Downloading";
                      [self.hud showInView:topMostController().view];
                 }
@@ -985,6 +989,7 @@ static BOOL isAuthenticationShowed = FALSE;
             BHMultipleDownload *dwManager = [[BHMultipleDownload alloc] init];
             [dwManager setDelegate:self];
             [dwManager downloadFiles:fileURLs];
+            self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
             self.hud.textLabel.text = @"Downloading";
             [self.hud showInView:topMostController().view];
 
@@ -997,6 +1002,7 @@ static BOOL isAuthenticationShowed = FALSE;
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
         [dwManager setDelegate:self];
+        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         self.hud.textLabel.text = @"Downloading";
         [self.hud showInView:topMostController().view];
     }
@@ -1330,6 +1336,7 @@ static BOOL isAuthenticationShowed = FALSE;
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
         [dwManager setDelegate:self];
+        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         self.hud.textLabel.text = @"Downloading";
         [self.hud showInView:topMostController().view];
     }
@@ -1342,6 +1349,7 @@ static BOOL isAuthenticationShowed = FALSE;
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
         [dwManager setDelegate:self];
+        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         self.hud.textLabel.text = @"Downloading";
         [self.hud showInView:topMostController().view];
     }
@@ -1354,6 +1362,7 @@ static BOOL isAuthenticationShowed = FALSE;
         BHDownload *dwManager = [[BHDownload alloc] init];
         [dwManager downloadFileWithURL:downloadableURL];
         [dwManager setDelegate:self];
+        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         self.hud.textLabel.text = @"Downloading";
         [self.hud showInView:topMostController().view];
     }
