@@ -890,13 +890,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %property (nonatomic, retain) UIProgressView *progressView;
 - (void)configWithModel:(id)model {
     %orig;
-    self.hud.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
-    self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    self.hud.square = NO;
-    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-    self.hud.indicatorView = self.progressView;
-    [self addHandleLongPress];
-
+    self.elementsHidden = false;
     if ([BHIManager downloadButton]){
         [self addDownloadButton];
     }
@@ -906,13 +900,7 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 - (void)configureWithModel:(id)model {
     %orig;
-    self.hud.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
-    self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    self.hud.square = NO;
-    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-    self.hud.indicatorView = self.progressView;
-    [self addHandleLongPress];
-
+    self.elementsHidden = false;
     if ([BHIManager downloadButton]){
         [self addDownloadButton];
     }
@@ -1298,11 +1286,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %property (nonatomic, retain) NSString *fileextension;
 - (void)configWithModel:(id)model {
     %orig;
-    [self addHandleLongPress];
-    self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    self.hud.square = NO;
-    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-    self.hud.indicatorView = self.progressView;
+    self.elementsHidden = false;
     if ([BHIManager downloadButton]){
         [self addDownloadButton];
     }
@@ -1312,11 +1296,7 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 - (void)configureWithModel:(id)model {
     %orig;
-    self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    self.hud.square = NO;
-    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-    self.hud.indicatorView = self.progressView;
-    [self addHandleLongPress];
+    self.elementsHidden = false;
     if ([BHIManager downloadButton]){
         [self addDownloadButton];
     }
