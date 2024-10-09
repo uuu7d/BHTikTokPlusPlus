@@ -1,4 +1,4 @@
-//
+/* //
 //  SettingsViewController.h
 //  FlexCrack
 //
@@ -42,3 +42,4 @@ typedef NS_ENUM(NSInteger, DynamicSpecifierOperatorType) {
 
 @interface BHSwitchTableCell : PSSwitchTableCell
 @end
+ */

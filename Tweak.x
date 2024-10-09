@@ -47,12 +47,13 @@ static BOOL isAuthenticationShowed = FALSE;
 
 %hook AWEPlayVideoPlayerController
 - (void)setPlaybackRate:(CGFloat)arg1 {
-     if ([BHIManager speedEnabled]) {
+    %orig;
+/*      if ([BHIManager speedEnabled]) {
         NSNumber *number = [BHIManager selectedSpeed];
         %orig([number floatValue]);
     } else {
         %orig;
-    }
+    } */
 }
 %end
 
@@ -248,7 +249,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %hook TTKSettingsBaseCellPlugin
 - (void)didSelectItemAtIndex:(NSInteger)index {
     if ([self.itemModel.identifier isEqualToString:@"bhtiktok_settings"]) {
-        UINavigationController *BHTikTokSettings = [[UINavigationController alloc] initWithRootViewController:[[SettingsViewController alloc] init]];
+        UINavigationController *BHTikTokSettings = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
         [topMostController() presentViewController:BHTikTokSettings animated:true completion:nil];
     } else {
         return %orig;
@@ -873,7 +874,7 @@ static BOOL isAuthenticationShowed = FALSE;
     if (![BHIManager liveActionEnabled] || [BHIManager selectedLiveAction] == 0) {
         %orig;
     } else if ([BHIManager liveActionEnabled] && [[BHIManager selectedLiveAction] intValue] == 1) {
-        UINavigationController *BHTikTokSettings = [[UINavigationController alloc] initWithRootViewController:[[SettingsViewController alloc] init]];
+        UINavigationController *BHTikTokSettings = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
         [topMostController() presentViewController:BHTikTokSettings animated:true completion:nil];
     } else {
         %orig;
@@ -887,10 +888,9 @@ static BOOL isAuthenticationShowed = FALSE;
 %property (nonatomic, strong) JGProgressHUD *hud;
 %property(nonatomic, assign) BOOL elementsHidden;
 %property (nonatomic, retain) NSString *fileextension;
+%property (nonatomic, retain) UIProgressView *progressView;
 - (void)configWithModel:(id)model {
     %orig;
-    self.hud.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
-    [self addHandleLongPress];
     self.elementsHidden = false;
     if ([BHIManager downloadButton]){
         [self addDownloadButton];
@@ -901,8 +901,6 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 - (void)configureWithModel:(id)model {
     %orig;
-    self.hud.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
-    [self addHandleLongPress];
     self.elementsHidden = false;
     if ([BHIManager downloadButton]){
         [self addDownloadButton];
@@ -1259,6 +1257,7 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 
 %new - (void)downloadProgress:(float)progress {
+    self.progressView.progress = progress;
     self.hud.detailTextLabel.text = [BHIManager getDownloadingPersent:progress];
     self.hud.tapOutsideBlock = ^(JGProgressHUD * _Nonnull HUD) {
         self.hud.textLabel.text = @"Backgrounding ✌️";
@@ -1289,10 +1288,10 @@ static BOOL isAuthenticationShowed = FALSE;
 %hook AWEAwemeDetailTableViewCell
 %property (nonatomic, strong) JGProgressHUD *hud;
 %property(nonatomic, assign) BOOL elementsHidden;
+%property (nonatomic, retain) UIProgressView *progressView;
 %property (nonatomic, retain) NSString *fileextension;
 - (void)configWithModel:(id)model {
     %orig;
-    [self addHandleLongPress];
     self.elementsHidden = false;
     if ([BHIManager downloadButton]){
         [self addDownloadButton];
@@ -1303,7 +1302,6 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 - (void)configureWithModel:(id)model {
     %orig;
-    [self addHandleLongPress];
     self.elementsHidden = false;
     if ([BHIManager downloadButton]){
         [self addDownloadButton];
@@ -1489,6 +1487,7 @@ static BOOL isAuthenticationShowed = FALSE;
         self.hud.textLabel.text = @"Backgrounding ✌️";
         [self.hud dismissAfterDelay:0.4];
     };
+    self.progressView.progress = progress;
     self.hud.detailTextLabel.text = [BHIManager getDownloadingPersent:progress];
 }
 %new - (void)downloadDidFinish:(NSURL *)filePath Filename:(NSString *)fileName {
@@ -1676,11 +1675,6 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 %end
 
-%hook HBForceCepheiPrefs
-+ (BOOL)forceCepheiPrefsWhichIReallyNeedToAccessAndIKnowWhatImDoingISwear {
-    return YES;
-}
-%end
 
 %ctor {
     jailbreakPaths = @[

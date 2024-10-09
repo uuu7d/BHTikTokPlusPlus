@@ -6,4 +6,4 @@ Description: An awesome tweak for TikTok!
 Maintainer: raul saeed
 Author: raul saeed
 Section: Tweaks
-Depends: mobilesubstrate, ws.hbang.common
+Depends: mobilesubstrate

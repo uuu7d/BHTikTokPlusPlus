@@ -8,6 +8,8 @@
 #import "BHMultipleDownload.h"
 #import "JGProgressHUD/JGProgressHUD.h"
 #import <Photos/Photos.h>
+#import "TestSettingsVC.h"
+#import "ViewController.h"
 
 @interface AppDelegate : NSObject <UIApplicationDelegate>
 @end
@@ -256,6 +258,7 @@
 @property(nonatomic, assign) BOOL elementsHidden;
 @property (nonatomic, strong) JGProgressHUD *hud;
 @property (nonatomic, retain) NSString *fileextension;
+@property (nonatomic, retain) UIProgressView *progressView;
 - (void)addHandleLongPress;
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender;
 - (void)addHideElementButton;
@@ -284,6 +287,7 @@
 @property(nonatomic, assign) BOOL elementsHidden;
 @property (nonatomic, strong) JGProgressHUD *hud;
 @property (nonatomic, retain) NSString *fileextension;
+@property (nonatomic, retain) UIProgressView *progressView;
 - (void)addHandleLongPress;
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender;
 - (void)addHideElementButton;
