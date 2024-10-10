@@ -18,12 +18,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor systemBackgroundColor];
+
     self.title = @"BHTikTok++ Settings";
-      self.navigationController.navigationBar.prefersLargeTitles = YES;
-    self.staticTable = [[UITableView alloc] initWithFrame:self.view.bounds ];
+    self.staticTable = [[UITableView alloc] initWithFrame:CGRectZero ];
+    self.staticTable.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.staticTable];
+    [NSLayoutConstraint activateConstraints:@[
+        [self.staticTable.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [self.staticTable.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+        [self.staticTable.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [self.staticTable.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor]
+    ]];
     self.staticTable.dataSource = self;
     self.staticTable.delegate = self;
+    self.staticTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(regionSelected:)
                                                  name:@"RegionSelectedNotification"
@@ -62,13 +71,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0: // Feed section
-            return 14; // The number of items in the Feed array
+            return 15; // The number of items in the Feed array
         case 1: // Profile section
             return 4; // The number of items in the Profile array
         case 2: // Confirm section
             return 4; // The number of items in the Confirm array
         case 3: // Other section
-            return 7; // The number of items in the Other array
+            return 9; // The number of items in the Other array
         case 4:
             return 2;
         case 5:
@@ -112,11 +121,11 @@
             case 7:
                 return [self createSwitchCellWithTitle:@"Show Progress Bar"
                                                   Detail:@"Display progress bar on video playback"
-                                                    Key:@"show_progress_bar"];
+                                                    Key:@"show_porgress_bar"];
             case 8:
                 return [self createSwitchCellWithTitle:@"Transparent Comments"
                                                   Detail:@"Make comments transparent"
-                                                    Key:@"transparent_comment"];
+                                                    Key:@"transparent_commnet"];
             case 9:
                 return [self createSwitchCellWithTitle:@"Show Usernames"
                                                   Detail:@"Display usernames on videos"
@@ -136,7 +145,11 @@
             case 13:
                 return [self createSwitchCellWithTitle:@"Skip Recommendations"
                                                   Detail:@"Skip recommended videos"
-                                                    Key:@"skip_recommendations"];
+                                                    Key:@"skip_recommnedations"];
+            case 14:
+                return [self createSwitchCellWithTitle:@"Upload Region"
+                                                  Detail:@"Show Upload Region Flag Next to Username"
+                                                    Key:@"upload_region"];
             default:
                 break;
         }
@@ -192,23 +205,107 @@
                 return [self createSwitchCellWithTitle:@"Enable Fake Changes"
                                                   Detail:@"Enable fake profile changes"
                                                     Key:@"en_fake"];
-            case 2:
+            case 2: {
+                UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    
+                UILabel *followerLabel = [[UILabel alloc] init];
+            followerLabel.text = @"Follower:";
+            followerLabel.font = [UIFont systemFontOfSize:16];
+            followerLabel.translatesAutoresizingMaskIntoConstraints = NO; // Enable Auto Layout
+            [cell.contentView addSubview:followerLabel];
+            
+            // Create the UITextField for entering text
+            UITextField *textField = [[UITextField alloc] init];
+            textField.placeholder = @"Enter follower count";
+            textField.borderStyle = UITextBorderStyleRoundedRect;
+            textField.delegate = self;
+            textField.tag = 2;
+            textField.returnKeyType = UIReturnKeyDone;
+            textField.translatesAutoresizingMaskIntoConstraints = NO; // Enable Auto Layout
+            [cell.contentView addSubview:textField];
+            
+            // Set constraints for UILabel and UITextField
+            [NSLayoutConstraint activateConstraints:@[
+                // Constraints for followerLabel
+                [followerLabel.leadingAnchor constraintEqualToAnchor:cell.contentView.leadingAnchor constant:15],
+                [followerLabel.centerYAnchor constraintEqualToAnchor:cell.contentView.centerYAnchor],
+                [followerLabel.widthAnchor constraintEqualToConstant:100], // Fixed width for the label
+                
+                // Constraints for textField
+                [textField.leadingAnchor constraintEqualToAnchor:followerLabel.trailingAnchor constant:10],
+                [textField.trailingAnchor constraintEqualToAnchor:cell.contentView.trailingAnchor constant:-15],
+                [textField.centerYAnchor constraintEqualToAnchor:cell.contentView.centerYAnchor],
+                [textField.heightAnchor constraintEqualToConstant:30] // Fixed height for the text field
+            ]];
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *savedText = [defaults stringForKey:@"following_count"];
+            if (savedText) {
+                textField.text = savedText;
+            }
+            
+            return cell;
+            }
+            case 3: {
+                       // Create a new cell
+                UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+
+                // Create the UILabel for "Following:"
+                UILabel *followingLabel = [[UILabel alloc] init];
+                followingLabel.text = @"Following:";
+                followingLabel.font = [UIFont systemFontOfSize:16];
+                followingLabel.translatesAutoresizingMaskIntoConstraints = NO; // Enable Auto Layout
+                [cell.contentView addSubview:followingLabel];
+
+                // Create the UITextField for entering text
+                UITextField *textField = [[UITextField alloc] init];
+                textField.placeholder = @"Enter following count";
+                textField.borderStyle = UITextBorderStyleRoundedRect;
+                textField.delegate = self;
+                textField.tag = 1;
+                textField.returnKeyType = UIReturnKeyDone;
+                textField.translatesAutoresizingMaskIntoConstraints = NO; // Enable Auto Layout
+                [cell.contentView addSubview:textField];
+
+                // Set constraints for UILabel and UITextField
+                [NSLayoutConstraint activateConstraints:@[
+                    // Constraints for followingLabel
+                    [followingLabel.leadingAnchor constraintEqualToAnchor:cell.contentView.leadingAnchor constant:15],
+                    [followingLabel.centerYAnchor constraintEqualToAnchor:cell.contentView.centerYAnchor],
+                    [followingLabel.widthAnchor constraintEqualToConstant:100], // Fixed width for the label
+                    
+                    // Constraints for textField
+                    [textField.leadingAnchor constraintEqualToAnchor:followingLabel.trailingAnchor constant:10],
+                    [textField.trailingAnchor constraintEqualToAnchor:cell.contentView.trailingAnchor constant:-15],
+                    [textField.centerYAnchor constraintEqualToAnchor:cell.contentView.centerYAnchor],
+                    [textField.heightAnchor constraintEqualToConstant:30] // Fixed height for the text field
+                ]];
+
+                // Load saved text from NSUserDefaults
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                NSString *savedText = [defaults stringForKey:@"following_count"];
+                if (savedText) {
+                    textField.text = savedText;
+                }
+
+                return cell;
+            }
+            case 4:
                 return [self createSwitchCellWithTitle:@"Fake Verified"
                                                   Detail:@"Make your account appear verified"
                                                     Key:@"fake_verify"];
-            case 3:
+            case 5:
                 return [self createSwitchCellWithTitle:@"Extended Bio"
                                                   Detail:@"Extend bio section of your profile"
                                                     Key:@"extended_bio"];
-            case 4:
+            case 6:
                 return [self createSwitchCellWithTitle:@"Extended Comments"
                                                   Detail:@"Extend the length of your comments"
                                                     Key:@"extendedComment"];
-            case 5:
+            case 7:
                 return [self createSwitchCellWithTitle:@"Upload HD"
                                                   Detail:@"Upload videos in HD quality"
                                                     Key:@"upload_hd"];
-            case 6:
+            case 8:
                 return [self createSwitchCellWithTitle:@"App Lock"
                                                   Detail:@"Lock the app with a passcode"
                                                     Key:@"padlock"];
@@ -311,6 +408,23 @@
 //                                  withRowAnimation:UITableViewRowAnimationAutomatic];
 //        }
 //    [self.staticTable endUpdates];
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.tag == 1){
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:textField.text forKey:@"following_count"];
+        [defaults synchronize];
+    } else if (textField.tag == 2){
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:textField.text forKey:@"follower_count"];
+        [defaults synchronize]; 
+    }
+
+
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

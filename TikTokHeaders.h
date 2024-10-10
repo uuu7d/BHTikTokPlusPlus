@@ -24,6 +24,15 @@
 @interface TTKProfileRootView: UIView
 @end
 
+@interface TTKProfileBaseComponentModel : NSObject
+@property (nonatomic, strong) NSString *componentID;
+@property (nonatomic, copy, readwrite) NSString *name;
+@property (nonatomic, copy, readwrite) NSArray *components;
+@property (nonatomic, copy, readwrite) NSDictionary *bizData;
+- (NSString *)formattedStringFromNumber:(NSNumber *)number; //new 
+- (NSNumber *)numberFromUserDefaultsForKey:(NSString *)key; // new
+@end
+
 @interface BDImageView: UIImageView
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender;
 - (void)addHandleLongPress;
