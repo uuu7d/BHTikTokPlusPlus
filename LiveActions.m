@@ -12,7 +12,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"Live Button Actions";
     self.liveFuncTitles = @[@"Default", @"BHTikTok++ Settings"];
     self.liveFuncValues = @[@0, @1];
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];

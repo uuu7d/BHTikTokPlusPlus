@@ -357,13 +357,64 @@ static BOOL isAuthenticationShowed = FALSE;
     return %orig;
 }
 %end
-
+%hook TTKStoreRegionService
+- (id)storeRegion {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return [selectedRegion[@"code"] lowercaseString];
+        }
+        return %orig;
+    }
+    return %orig;
+}
+- (id)getStoreRegion {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return [selectedRegion[@"code"] lowercaseString];
+        }
+        return %orig;
+    }
+    return %orig;
+}
+- (void)setStoreRegion:(id)arg1 {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return %orig([selectedRegion[@"code"] lowercaseString]);
+        }
+        return %orig(arg1);
+    }
+    return %orig(arg1);
+}
+%end
 %hook TIKTOKRegionManager
 + (NSString *)systemRegion {
     if ([BHIManager regionChangingEnabled]) {
         if ([BHIManager selectedRegion]) {
             NSDictionary *selectedRegion = [BHIManager selectedRegion];
-            return @"JP";
+            return selectedRegion[@"code"];
+        }
+        return %orig;
+    }
+    return %orig;
+}
++ (id)region {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return selectedRegion[@"code"];
+        }
+        return %orig;
+    }
+    return %orig;
+}
++ (id)mccmnc {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return [NSString stringWithFormat:@"%@%@", selectedRegion[@"mcc"], selectedRegion[@"mnc"]];
         }
         return %orig;
     }
@@ -373,7 +424,71 @@ static BOOL isAuthenticationShowed = FALSE;
     if ([BHIManager regionChangingEnabled]) {
         if ([BHIManager selectedRegion]) {
             NSDictionary *selectedRegion = [BHIManager selectedRegion];
-            return @"JP";
+            return selectedRegion[@"code"];
+        }
+        return %orig;
+    }
+    return %orig;
+}
++ (id)currentRegionV2 {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return selectedRegion[@"code"];
+        }
+        return %orig;
+    }
+    return %orig;
+}
++ (id)localRegion {
+        if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return selectedRegion[@"code"];
+        }
+        return %orig;
+    }
+    return %orig;
+}
+
+%end
+
+%hook TTKPassportAppStoreRegionModel
+- (id)storeRegion {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return [selectedRegion[@"code"] lowercaseString];
+        }
+        return %orig;
+    }
+    return %orig;
+}
+- (void)setStoreRegion:(id)arg1 {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return %orig([selectedRegion[@"code"] lowercaseString]);
+        }
+        return %orig(arg1);
+    }
+    return %orig(arg1);
+}
+- (void)setLocalizedCountryName:(id)arg1 {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return %orig(selectedRegion[@"name"]);
+        }
+        return %orig(arg1);
+    }
+    return %orig(arg1);
+}
+- (id)localizedCountryName {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return selectedRegion[@"name"];
         }
         return %orig;
     }
@@ -468,8 +583,15 @@ static BOOL isAuthenticationShowed = FALSE;
     }
     return %orig;
 }
-- (void)setCurrentAppRegion:(id)agr1 {
-    %orig(@"JP");
+- (void)setCurrentAppRegion:(id)arg1 {
+    if ([BHIManager regionChangingEnabled]) {
+        if ([BHIManager selectedRegion]) {
+            NSDictionary *selectedRegion = [BHIManager selectedRegion];
+            return %orig(selectedRegion[@"code"]);
+        }
+        return %orig(arg1);
+    }
+    return %orig(arg1);
 }
 %end
 
@@ -947,6 +1069,7 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 - (void)configureWithModel:(id)model {
     %orig;
+    NSLog(@"ashad");
     self.elementsHidden = false;
     if ([BHIManager downloadButton]){
         [self addDownloadButton];

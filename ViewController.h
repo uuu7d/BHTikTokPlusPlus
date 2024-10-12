@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TikTokHeaders.h"
 @interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 

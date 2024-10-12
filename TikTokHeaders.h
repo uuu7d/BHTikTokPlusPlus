@@ -8,7 +8,6 @@
 #import "BHMultipleDownload.h"
 #import "JGProgressHUD/JGProgressHUD.h"
 #import <Photos/Photos.h>
-#import "TestSettingsVC.h"
 #import "ViewController.h"
 
 @interface AppDelegate : NSObject <UIApplicationDelegate>
