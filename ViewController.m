@@ -62,6 +62,8 @@
             break;
         case 5:
             return @"Live Button Function";
+        case 6: 
+            return @"Developer";
         default:
             break;
     }
@@ -77,11 +79,13 @@
         case 2: // Confirm section
             return 4; // The number of items in the Confirm array
         case 3: // Other section
-            return 9; // The number of items in the Other array
+            return 10; // The number of items in the Other array
         case 4:
             return 2;
         case 5:
             return 2;
+        case 6:
+            return 3;
         default:
             return 0; // Fallback for unexpected section
     }
@@ -309,6 +313,10 @@
                 return [self createSwitchCellWithTitle:@"App Lock"
                                                   Detail:@"Lock the app with a passcode"
                                                     Key:@"padlock"];
+            case 9:
+            return [self createSwitchCellWithTitle:@"Enable Flex"
+                                                  Detail:@"Developers Only, DON'T touch it if you don't know what you are doing."
+                                                    Key:@"flex_enebaled"];
             default:
                 break;
         }
@@ -383,6 +391,7 @@
     
     // Set the cell's text label (optional)
     cell.textLabel.text = title;
+    cell.detailTextLabel.numberOfLines = 0;
     cell.detailTextLabel.text = detail;  // Set the description text
     cell.detailTextLabel.textColor = [UIColor grayColor];
     return cell;
