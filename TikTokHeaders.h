@@ -8,6 +8,7 @@
 #import "BHMultipleDownload.h"
 #import "JGProgressHUD/JGProgressHUD.h"
 #import <Photos/Photos.h>
+#import "ViewController.h"
 
 @interface AppDelegate : NSObject <UIApplicationDelegate>
 @end
@@ -20,6 +21,15 @@
 @end
 
 @interface TTKProfileRootView: UIView
+@end
+
+@interface TTKProfileBaseComponentModel : NSObject
+@property (nonatomic, strong) NSString *componentID;
+@property (nonatomic, copy, readwrite) NSString *name;
+@property (nonatomic, copy, readwrite) NSArray *components;
+@property (nonatomic, copy, readwrite) NSDictionary *bizData;
+- (NSString *)formattedStringFromNumber:(NSNumber *)number; //new 
+- (NSNumber *)numberFromUserDefaultsForKey:(NSString *)key; // new
 @end
 
 @interface BDImageView: UIImageView
@@ -257,6 +267,8 @@
 @property (nonatomic, strong) JGProgressHUD *hud;
 @property (nonatomic, retain) NSString *fileextension;
 @property (nonatomic, retain) UIProgressView *progressView;
+- (void)addHandleLongPress;
+- (void)handleLongPress:(UILongPressGestureRecognizer *)sender;
 - (void)addHideElementButton;
 - (void)hideElementButtonHandler:(UIButton *)sender;
 - (void)addDownloadButton;
@@ -284,6 +296,8 @@
 @property (nonatomic, strong) JGProgressHUD *hud;
 @property (nonatomic, retain) NSString *fileextension;
 @property (nonatomic, retain) UIProgressView *progressView;
+- (void)addHandleLongPress;
+- (void)handleLongPress:(UILongPressGestureRecognizer *)sender;
 - (void)addHideElementButton;
 - (void)hideElementButtonHandler:(UIButton *)sender;
 - (void)addDownloadButton;
