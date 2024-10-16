@@ -8,6 +8,7 @@
 #import "ViewController.h"
 #import "CountryTable.h"
 #import "LiveActions.h"
+#import "PlaybackSpeed.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) UITableView *staticTable;
@@ -45,7 +46,7 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 7;
+    return 8;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -64,6 +65,8 @@
         case 5:
             return @"Live Button Function";
         case 6:
+            return @"Playback Speed";
+        case 7:
             return @"Developer";
         default:
             break;
@@ -74,18 +77,20 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0: // Feed section
-            return 15; 
+            return 15;
         case 1: // Profile section
             return 4;
         case 2: // Confirm section
-            return 4; 
+            return 4;
         case 3: // Other section
-            return 10; 
+            return 10;
         case 4:
             return 2; // region section
         case 5:
             return 2; // live action section
         case 6:
+            return 2;
+        case 7:
             return 3; // developer section
         default:
             return 0; // Fallback for unexpected section
@@ -216,7 +221,7 @@
                 UILabel *followerLabel = [[UILabel alloc] init];
                 followerLabel.text = @"Follower:";
                 followerLabel.font = [UIFont systemFontOfSize:16];
-                followerLabel.translatesAutoresizingMaskIntoConstraints = NO; 
+                followerLabel.translatesAutoresizingMaskIntoConstraints = NO;
                 [cell.contentView addSubview:followerLabel];
                 
                 UITextField *textField = [[UITextField alloc] init];
@@ -225,7 +230,7 @@
                 textField.delegate = self;
                 textField.tag = 2;
                 textField.returnKeyType = UIReturnKeyDone;
-                textField.translatesAutoresizingMaskIntoConstraints = NO; 
+                textField.translatesAutoresizingMaskIntoConstraints = NO;
                 [cell.contentView addSubview:textField];
                 
                 [NSLayoutConstraint activateConstraints:@[
@@ -252,7 +257,7 @@
                 UILabel *followingLabel = [[UILabel alloc] init];
                 followingLabel.text = @"Following:";
                 followingLabel.font = [UIFont systemFontOfSize:16];
-                followingLabel.translatesAutoresizingMaskIntoConstraints = NO; 
+                followingLabel.translatesAutoresizingMaskIntoConstraints = NO;
                 [cell.contentView addSubview:followingLabel];
                 
                 UITextField *textField = [[UITextField alloc] init];
@@ -261,18 +266,18 @@
                 textField.delegate = self;
                 textField.tag = 1;
                 textField.returnKeyType = UIReturnKeyDone;
-                textField.translatesAutoresizingMaskIntoConstraints = NO; 
+                textField.translatesAutoresizingMaskIntoConstraints = NO;
                 [cell.contentView addSubview:textField];
                 
                 [NSLayoutConstraint activateConstraints:@[
                     [followingLabel.leadingAnchor constraintEqualToAnchor:cell.contentView.leadingAnchor constant:15],
                     [followingLabel.centerYAnchor constraintEqualToAnchor:cell.contentView.centerYAnchor],
-                    [followingLabel.widthAnchor constraintEqualToConstant:100], 
+                    [followingLabel.widthAnchor constraintEqualToConstant:100],
                     
                     [textField.leadingAnchor constraintEqualToAnchor:followingLabel.trailingAnchor constant:10],
                     [textField.trailingAnchor constraintEqualToAnchor:cell.contentView.trailingAnchor constant:-15],
                     [textField.centerYAnchor constraintEqualToAnchor:cell.contentView.centerYAnchor],
-                    [textField.heightAnchor constraintEqualToConstant:30] 
+                    [textField.heightAnchor constraintEqualToConstant:30]
                 ]];
                 
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -338,7 +343,7 @@
                 UITableViewCell *liveAction = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
                 liveAction.textLabel.text = @"Actions";
                 NSString *selectedLiveAction = [defaults valueForKey:@"live_action"];
-                NSArray *liveFuncTitles = @[@"Default", @"BHTikTok++ Settings"];
+                NSArray *liveFuncTitles = @[@"Default", @"BHTikTok++ Settings", @"Playback Speed"];
                 if (selectedLiveAction != nil) {
                     liveAction.detailTextLabel.text = [NSString stringWithFormat:@"%@", [liveFuncTitles objectAtIndex:[selectedLiveAction integerValue]]];
                 }
@@ -350,6 +355,26 @@
                 break;
         }
     } else if (indexPath.section == 6) {
+        switch (indexPath.row) {
+            case 0: {
+                return [self createSwitchCellWithTitle:@"Playback Speed"
+                                                Detail:@"Enable Presistent Playback Speed."
+                                                   Key:@"playback_en"];
+            }
+            case 1: {
+                UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+                cell.textLabel.text = @"Speeds";
+                
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                NSString *selectedSpeed = [defaults valueForKey:@"playback_speed"];
+                if (selectedSpeed != nil) {
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ x", selectedSpeed];
+                }
+                return cell;
+            }
+        }
+    }
+    else if (indexPath.section == 7) {
         switch (indexPath.row) {
             case 0: {
                 UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
@@ -384,7 +409,7 @@
                 break;
         }
     }
-    return [UITableViewCell new]; 
+    return [UITableViewCell new];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -399,21 +424,26 @@
         LiveActions *liveActions = [[LiveActions alloc] init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:liveActions];
         [self presentViewController:navController animated:YES completion:nil];
-    } else if (indexPath.section == 6 && indexPath.row == 0){
+    } else if (indexPath.section == 6 && indexPath.row == 1) {
+        PlaybackSpeed *liveActions = [[PlaybackSpeed alloc] init];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:liveActions];
+        [self presentViewController:navController animated:YES completion:nil];
+    }
+    else if (indexPath.section == 7 && indexPath.row == 0){
         NSURL *url = [NSURL URLWithString:@"https://x.com/Ashad__Saeed"];
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
             
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         }
     }
-    else if (indexPath.section == 6 && indexPath.row == 1){
+    else if (indexPath.section == 7 && indexPath.row == 1){
         NSURL *url = [NSURL URLWithString:@"https://github.com/raulsaeed"];;
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
             
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         }
     }
-    else if (indexPath.section == 6 && indexPath.row == 2){
+    else if (indexPath.section == 7 && indexPath.row == 2){
         NSURL *url = [NSURL URLWithString:@"https://buymeacoffee.com/raulsaeed79"];
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
@@ -438,7 +468,7 @@
     
     cell.textLabel.text = title;
     cell.detailTextLabel.numberOfLines = 0;
-    cell.detailTextLabel.text = detail; 
+    cell.detailTextLabel.text = detail;
     cell.detailTextLabel.textColor = [UIColor grayColor];
     return cell;
     

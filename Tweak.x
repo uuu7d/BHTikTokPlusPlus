@@ -48,15 +48,19 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 %end
 
-%hook AWEPlayVideoPlayerController
+%hook TTKMediaSpeedControlService
 - (void)setPlaybackRate:(CGFloat)arg1 {
-    %orig;
-/*      if ([BHIManager speedEnabled]) {
-        NSNumber *number = [BHIManager selectedSpeed];
-        %orig([number floatValue]);
+    NSNumber *speed = [BHIManager selectedSpeed];
+    if (![BHIManager speedEnabled] || [speed isEqualToNumber:@1]) {
+        return %orig;
+    }
+    if ([BHIManager speedEnabled]) {
+        if ([BHIManager selectedSpeed]) {
+            return %orig([speed floatValue]);
+        }
     } else {
-        %orig;
-    } */
+        return %orig;
+    }
 }
 %end
 
@@ -1044,7 +1048,11 @@ static BOOL isAuthenticationShowed = FALSE;
     } else if ([BHIManager liveActionEnabled] && [[BHIManager selectedLiveAction] intValue] == 1) {
         UINavigationController *BHTikTokSettings = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
         [topMostController() presentViewController:BHTikTokSettings animated:true completion:nil];
-    } else {
+    } else if ([BHIManager liveActionEnabled] && [[BHIManager selectedLiveAction] intValue] == 2) {
+        UINavigationController *playbackSpeedVC = [[UINavigationController alloc] initWithRootViewController:[[PlaybackSpeed alloc] init]];
+        [topMostController() presentViewController:playbackSpeedVC animated:true completion:nil];
+    }
+    else {
         %orig;
     }
 

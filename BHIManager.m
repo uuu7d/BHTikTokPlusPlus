@@ -78,7 +78,7 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"en_region"];
 }
 + (BOOL)speedEnabled {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"en_speed"];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"playback_en"];
 }
 + (BOOL)liveActionEnabled {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"en_livefunc"];
@@ -87,7 +87,7 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"live_action"];
 }
 + (NSNumber *)selectedSpeed {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"speed"];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"playback_speed"];
 }
 + (BOOL)videoLikeCount {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"video_like_count"];

@@ -9,6 +9,7 @@
 #import "JGProgressHUD/JGProgressHUD.h"
 #import <Photos/Photos.h>
 #import "ViewController.h"
+#import "PlaybackSpeed.h"
 
 @interface AppDelegate : NSObject <UIApplicationDelegate>
 @end
