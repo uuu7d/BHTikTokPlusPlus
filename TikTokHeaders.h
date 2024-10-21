@@ -8,8 +8,8 @@
 #import "BHMultipleDownload.h"
 #import "JGProgressHUD/JGProgressHUD.h"
 #import <Photos/Photos.h>
-#import "ViewController.h"
-#import "PlaybackSpeed.h"
+#import "Settings/ViewController.h"
+#import "Settings/PlaybackSpeed.h"
 
 @interface AppDelegate : NSObject <UIApplicationDelegate>
 @end
@@ -24,14 +24,6 @@
 @interface TTKProfileRootView: UIView
 @end
 
-@interface TTKProfileBaseComponentModel : NSObject
-@property (nonatomic, strong) NSString *componentID;
-@property (nonatomic, copy, readwrite) NSString *name;
-@property (nonatomic, copy, readwrite) NSArray *components;
-@property (nonatomic, copy, readwrite) NSDictionary *bizData;
-- (NSString *)formattedStringFromNumber:(NSNumber *)number; //new 
-- (NSNumber *)numberFromUserDefaultsForKey:(NSString *)key; // new
-@end
 
 @interface BDImageView: UIImageView
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender;
@@ -380,6 +372,15 @@
 - (void)scrollToNextVideo;
 - (void)pause;
 - (void)stop;
+@end
+
+@interface TTKProfileBaseComponentModel : NSObject
+@property (nonatomic, strong) NSString *componentID;
+@property (nonatomic, copy, readwrite) NSString *name;
+@property (nonatomic, copy, readwrite) NSArray *components;
+@property (nonatomic, copy, readwrite) NSDictionary *bizData;
+- (NSString *)formattedStringFromNumber:(NSNumber *)number; //new 
+- (NSNumber *)numberFromUserDefaultsForKey:(NSString *)key; // new
 @end
 
 static BOOL is_iPad() {

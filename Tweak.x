@@ -840,10 +840,10 @@ static BOOL isAuthenticationShowed = FALSE;
 	if ([BHIManager fakeChangesEnabled]) {
 		NSDictionary *originalData = %orig;
 		NSMutableDictionary *modifiedData = [originalData mutableCopy];
-
+		
 		NSNumber *fakeFollowingCount = [self numberFromUserDefaultsForKey:@"following_count"];
 		NSNumber *fakeFollowersCount = [self numberFromUserDefaultsForKey:@"follower_count"];
-
+		
 		if ([self.componentID isEqualToString:@"relation_info_follower"]) {
 			modifiedData[@"follower_count"] = fakeFollowersCount ?: @0; 
 		} else if ([self.componentID isEqualToString:@"relation_info_following"]) {
