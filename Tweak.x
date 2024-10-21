@@ -1048,10 +1048,7 @@ static BOOL isAuthenticationShowed = FALSE;
     } else if ([BHIManager liveActionEnabled] && [[BHIManager selectedLiveAction] intValue] == 1) {
         UINavigationController *BHTikTokSettings = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
         [topMostController() presentViewController:BHTikTokSettings animated:true completion:nil];
-    } else if ([BHIManager liveActionEnabled] && [[BHIManager selectedLiveAction] intValue] == 2) {
-        UINavigationController *playbackSpeedVC = [[UINavigationController alloc] initWithRootViewController:[[PlaybackSpeed alloc] init]];
-        [topMostController() presentViewController:playbackSpeedVC animated:true completion:nil];
-    }
+    } 
     else {
         %orig;
     }
