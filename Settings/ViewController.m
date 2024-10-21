@@ -430,14 +430,14 @@
         [self presentViewController:navController animated:YES completion:nil];
     }
     else if (indexPath.section == 7 && indexPath.row == 0){
-        NSURL *url = [NSURL URLWithString:@"https://x.com/Ashad__Saeed"];
+        NSURL *url = [NSURL URLWithString:@"https://github.com/raulsaeed"];
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
             
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         }
     }
     else if (indexPath.section == 7 && indexPath.row == 1){
-        NSURL *url = [NSURL URLWithString:@"https://github.com/raulsaeed"];;
+        NSURL *url = [NSURL URLWithString:@"https://x.com/Ashad__Saeed"];;
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
             
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
