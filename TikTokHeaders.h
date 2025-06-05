@@ -2,7 +2,6 @@
 #import <Foundation/Foundation.h>
 #import <SafariServices/SafariServices.h>
 #import "BHIManager.h"
-#import "SettingsViewController.h"
 #import "SecurityViewController.h"
 #import "BHDownload.h"
 #import "BHMultipleDownload.h"
