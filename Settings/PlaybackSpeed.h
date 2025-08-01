@@ -2,7 +2,7 @@
 //  PlaybackSpeed.h
 //  StaticTableView
 //
-//  Created by raul on 16/10/2024.
+//  Created by QRMtool on 16/10/2024.
 //
 
 #import <UIKit/UIKit.h>
