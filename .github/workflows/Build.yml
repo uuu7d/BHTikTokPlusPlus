@@ -21,7 +21,7 @@ jobs:
       # الخطوة 2: تثبيت Theos وكل الأدوات المطلوبة باستخدام Action جاهزة
       # هذا يغنيك عن تثبيت الأدوات يدويًا
       - name: Setup Theos
-        uses: Randomblock1/theos-action@v4
+        uses: Randomblock1/theos-action@v1
 
       # الخطوة 3: بناء المشروع وإنشاء حزمة .deb
       # هذا الأمر هو نفسه الذي تستخدمه محليًا
