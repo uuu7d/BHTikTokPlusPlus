@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    # سيتم تشغيل عملية البناء على أحدث نسخة من نظام macOS
+    #سيتم تشغيل عملية البناء على أحدث نسخة من نظام macOS
     runs-on: macos-latest
 
     steps:
