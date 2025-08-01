@@ -2,7 +2,7 @@
 //  ViewController.m
 //  StaticTableView
 //
-//  Created by raul on 08/10/2024.
+//  Created by QRM tweak on 08/10/2024.
 //
 
 #import "ViewController.h"
@@ -378,7 +378,7 @@
         switch (indexPath.row) {
             case 0: {
                 UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-                cell.textLabel.text = @"Raul Saeed";
+                cell.textLabel.text = @"QRMtool";
                 cell.textLabel.textColor = [UIColor systemBlueColor];
                 cell.detailTextLabel.text = @"Github Page";
                 cell.imageView.image = [UIImage systemImageNamed:@"link"];
@@ -387,7 +387,7 @@
             }
             case 1: {
                 UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-                cell.textLabel.text = @"Raul Saeed";
+                cell.textLabel.text = @"QRMtool";
                 cell.textLabel.textColor = [UIColor systemBlueColor];
                 cell.detailTextLabel.text = @"X Page";
                 cell.imageView.image = [UIImage systemImageNamed:@"link"];
@@ -430,21 +430,21 @@
         [self presentViewController:navController animated:YES completion:nil];
     }
     else if (indexPath.section == 7 && indexPath.row == 0){
-        NSURL *url = [NSURL URLWithString:@"https://github.com/raulsaeed"];
+        NSURL *url = [NSURL URLWithString:@"https://github.com/uuu7d"];
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
             
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         }
     }
     else if (indexPath.section == 7 && indexPath.row == 1){
-        NSURL *url = [NSURL URLWithString:@"https://x.com/Ashad__Saeed"];;
+        NSURL *url = [NSURL URLWithString:@"https://x.com/C4hmd"];;
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
             
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         }
     }
     else if (indexPath.section == 7 && indexPath.row == 2){
-        NSURL *url = [NSURL URLWithString:@"https://buymeacoffee.com/raulsaeed79"];
+        NSURL *url = [NSURL URLWithString:@"https://quran.ksu.edu.sa/m.php#aya=18_1&t=1"];;
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         }
