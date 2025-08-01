@@ -1,9 +1,9 @@
-Package: com.raulsaeed.bhtiktok++
-Name: BHTikTok++
-Version: 1.5
+Package: com.devland.enjoywithqrm
+Name: Enjoy with QRM
+Version: 2.1
 Architecture: iphoneos-arm
 Description: An awesome tweak for TikTok!
-Maintainer: raul saeed
-Author: raul saeed
+Maintainer: Raed Al-Marshdi
+Author: Raed Al-Marshdi
 Section: Tweaks
 Depends: mobilesubstrate
